@@ -1,5 +1,6 @@
 
 import java.util.Scanner;
+import static java.lang.Math.sqrt;
 
 /**
  * Description: The program calculates quadric equation
@@ -46,8 +47,8 @@ class EquationCalculator
     
     private void calc_roots()
     {
-        this.roots[0] = (-1*this.b + Math.sqrt(this.discr))/ 2 * this.a;
-        this.roots[1] = (-1*this.b - Math.sqrt(this.discr))/ 2 * this.a;
+        this.roots[0] = (-1*this.b + sqrt(this.discr))/ 2 * this.a;
+        this.roots[1] = (-1*this.b - sqrt(this.discr))/ 2 * this.a;
     }
     
     public void print_result()
