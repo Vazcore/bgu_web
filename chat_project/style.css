@@ -1,0 +1,19 @@
+body,html{
+	overflow-y: hidden; 
+}
+
+#panelGeneral{
+	position: relative;
+}	
+#clear_chat{
+	position:absolute;
+	top: 55px;
+	right: 5px;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.media-list.scrolled{
+	height: 350px;
+}
