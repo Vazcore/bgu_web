@@ -1,19 +1,14 @@
 
-package bgu.ibm.gabrusev;
+package by.bsu.ibmt.grouppv115po.gabrusev;
 
 import java.util.Random;
 import java.util.Scanner;
 
 /**
- * Description: The program is basically a `guess number` game
- * @version 0.0.1
- * @author Alexey Gabrusev 
- * group: PVO15
- * date: 15.03.2016
+ *
+ * @author Alexey Gabrusev <alexgabrusev@gmail.com>
  */
-
-class GuessGame
-{
+public class GuessGame {
     private int guesses = 0;
     private int guess = 0;
     private int max_guesses;
@@ -182,19 +177,5 @@ class GuessGame
             }
         }
         while(choice != 0);
-    }
-}
-
-public class GuessGameApp {
-    
-     /**
-     * @param args the command line arguments
-     */
-    public static void main (String[] args)
-    {        
-        // create object - GuessGame
-        GuessGame game = new GuessGame();
-        // start game
-        game.startGame();
-    }
+    } 
 }

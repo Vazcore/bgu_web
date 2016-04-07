@@ -1,3 +1,5 @@
+package by.bsu.ibmt.grouppv115po.gabrusev;
+
 
 import java.util.Random;
 import java.util.Scanner;
@@ -158,7 +160,7 @@ class GamesPack
     }
 }
 
-public class GamesWithLab3 {
+public class StartApp {
 
     /**
      * @param args the command line arguments
@@ -228,3 +230,5 @@ public class GamesWithLab3 {
     }
     
 }
+
+
