@@ -1,0 +1,88 @@
+--------------------------------------
+use Library
+go
+create proc BooksView
+as
+begin
+	select * from Books
+end
+
+execute BooksView;
+
+-------------Find Books By Author----------------------------
+
+use Library
+go
+create proc BooksSearchByAuthor
+@NameAuthor varchar(50) output
+as
+begin
+	select * from Books 
+	where Books.author = @NameAuthor
+end
+
+execute BooksSearchByAuthor 'Author 1'
+------------------------------------------------------------
+
+------------Find Books older than 'date' --------------------
+
+use Library
+go
+create proc BooksSearchBeforeYear
+@Year int output
+as
+begin
+	select * from Books 
+	where Books.year <= @Year
+end
+
+
+execute BooksSearchBeforeYear 1980;
+----------------------------------------------------------------
+
+--------------- Add new Book ---------------------------------
+
+
+use Library
+go
+create proc AddBook
+@Author varchar(50),
+@Title varchar(100),
+@Year int,
+@Price float,
+@Pages int,
+@Theme varchar(50)
+as
+begin
+	insert into Books
+	(author,title,year,price,pageNumber,theme)
+	values
+	(@Author, @Title, @Year, @Price, @Pages, @Theme)
+end
+
+
+execute AddBook
+'Tolstoy',
+'Old Man',
+1870,
+250,
+250,
+'Comedy';
+
+--------------------Show delivery by Year-------------------------------
+
+
+use Library
+go
+create proc ShowDeliveryByYear
+@Year int
+as
+begin
+	select * from Delivery
+	inner join Readers on Delivery.reader=Readers.reader_id
+	inner join Books on Delivery.book=Books.regNumber
+	where DATEPART(yyyy, Delivery.date_return)=@Year
+end
+
+
+execute ShowDeliveryByYear 2016;

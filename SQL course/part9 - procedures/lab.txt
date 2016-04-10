@@ -1,0 +1,96 @@
+declare @AvgMark int
+declare @TotalSum decimal
+declare @MSum decimal
+set @AvgMark=3
+SET @TotalSum=@MSum*1.8
+SET @AvgMark=(SELECT AVG(Mark) FROM Progress)
+
+
+------------------------------
+
+CREATE PROCEDURE NameStudent
+AS
+begin
+	SELECT StName ???,NRecordBook [? ???????]
+	 FROM Student
+	 ORDER BY StName DESC
+end
+
+
+execute NameStudent;
+
+
+-------------------------------
+USE University
+GO
+CREATE PROC PStudent
+ @NameGroup VARCHAR (20)='PO15'
+ AS
+ SELECT *
+ FROM Student ST
+ INNER JOIN SGroup SG
+ ON ST. IDGroup=SG.IDGroup
+ WHERE NameGroup=@NameGroup 
+ 
+ 
+ execute PStudent;
+ 
+ 
+ --------------------------------
+ 
+USE University
+GO
+CREATE PROC PStudentNew
+ @NameGroup VARCHAR (20) OUTPUT
+ AS
+ SELECT *
+ FROM Student ST
+ INNER JOIN SGroup SG
+ ON ST. IDGroup=SG. IDGroup
+ WHERE NameGroup =@NameGroup
+ 
+ execute PStudentNew 'PO15';
+ 
+ ----------------------------------
+ USE University
+GO
+CREATE PROC PStudentINSERT
+@NRecordBook VARCHAR(6),
+@INN VARCHAR(10),
+@StName VARCHAR(35),
+@IDGroup INT,
+@SPasport VARCHAR(4),
+@NPasport VARCHAR(6),
+@DataPasport DATETIME,
+@NameDeptPasport VARCHAR(35)
+AS
+ INSERT INTO Student
+ (NRecordBook,INN,StName,IDGroup,SPasport,NPasport,
+ DataPasport,NameDeptPasport)
+ VALUES
+ (@NRecordBook,@INN,@StName,@IDGroup,@SPasport,@NPasport,
+ @DataPasport,@NameDeptPasport)
+ 
+ EXEC PStudentINSERT
+'050008',
+'1111111110',
+'?????? ?.?.',
+3,
+'8701',
+'192320',
+'01.11.2002',
+'???? ?.????'
+
+
+------------------------------
+
+USE University
+GO
+CREATE PROC PStudentView
+ AS
+ SELECT *
+ FROM STUDENT
+ 
+ 
+ 
+ execute PStudentView;
