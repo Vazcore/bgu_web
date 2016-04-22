@@ -11,7 +11,7 @@ SET @AvgMark=(SELECT AVG(Mark) FROM Progress)
 CREATE PROCEDURE NameStudent
 AS
 begin
-	SELECT StName ???,NRecordBook [? ???????]
+	SELECT StName,NRecordBook
 	 FROM Student
 	 ORDER BY StName DESC
 end
@@ -49,7 +49,7 @@ CREATE PROC PStudentNew
  ON ST. IDGroup=SG. IDGroup
  WHERE NameGroup =@NameGroup
  
- execute PStudentNew 'PO15';
+ execute PStudentNew 'Group 1';
  
  ----------------------------------
  USE University
@@ -74,12 +74,12 @@ AS
  EXEC PStudentINSERT
 '050008',
 '1111111110',
-'?????? ?.?.',
+'Name 1',
 3,
 '8701',
 '192320',
 '01.11.2002',
-'???? ?.????'
+'dep99'
 
 
 ------------------------------
