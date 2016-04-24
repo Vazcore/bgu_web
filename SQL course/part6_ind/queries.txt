@@ -1,0 +1,40 @@
+Task 1
+
+select r.fio, count(r.reader_id) as 'count' from Readers as r inner join Delivery as d on r.reader_id=d.reader group by r.reader_id, r.fio
+order by count(r.reader_id)
+
+Task 2
+
+Select book that was taken more than 1 time by same reader
+
+select r.fio, b.author, b.title, count(d.reader) as 'count' from Readers as r inner join Delivery as d on r.reader_id=d.reader inner join Books as b on d.book=b.regNumber
+group by d.book, b.author, b.title, r.reader_id, r.fio
+having count(d.reader) > 1
+
+
+Task 3
+
+select books with more that 400 pages that cost less than 20$
+
+select * from Books as b where b.pageNumber > 400 and b.price < 20
+
+
+Task 4
+
+Find out - what library employer had a lot cases of bad exident on not returning book in time
+
+select d.library_employer, col2 = (select count(d2.library_employer) from Delivery as d2 where DATEDIFF(day, d2.date_delivery, d2.date_return) > 2 and d2.library_employer = d.library_employer) 
+from Delivery as d 
+group by d.library_employer
+having (select count(d2.library_employer) from Delivery as d2 where DATEDIFF(day, d2.date_delivery, d2.date_return) > 2 and d2.library_employer = d.library_employer) > 1
+
+
+Task 5
+
+Get top 5 of most popular books in library
+
+select top 5 b.author, b.title, count(d.book) as 'count' from Delivery as d inner join Books as b on d.book=b.regNumber
+group by d.book, b.author, b.title
+order by count(d.book)
+
+
