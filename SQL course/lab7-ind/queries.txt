@@ -1,0 +1,53 @@
+Task 1
+
+¬ыбрать читателей, у которых максимальна€ цена книги превысила среднюю стоимость всех книг
+
+
+select d.reader, r.fio, max(b_i.price) as 'Max Price' from Delivery as d inner join Books as b_i on d.book=b_i.regNumber
+inner join Readers as r on d.reader=r.reader_id
+group by d.reader, r.fio, b_i.price
+having avg(b_i.price) > (select  AVG(b.price) as 'avg price' from Books as b)
+
+
+Task 2
+
+ќбъединить книги по разным тематикам
+
+select * from Delivery as d inner join Books as b_i on d.book=b_i.regNumber
+inner join Readers as r on d.reader=r.reader_id
+where b_i.theme like '%Comedy%'
+
+UNION ALL
+
+select * from Delivery as d inner join Books as b_i on d.book=b_i.regNumber
+inner join Readers as r on d.reader=r.reader_id
+where b_i.theme like '%Romance%'
+
+
+Task 3
+
+¬ыбрать книги, которые никто не брал дл€ чтени€
+
+select * from Books as b
+where b.regNumber not in (select d.book from Delivery as d)
+
+
+Task 4
+
+—лучаи, когда на долю библиотекар€ выпало более 1 случа€ просроченного возврата
+
+select d.library_employer, (select count(d2.library_employer) from Delivery as d2 where DATEDIFF(day, d2.date_delivery, d2.date_return) > 2 and d2.library_employer = d.library_employer) as 'ѕлохие случаи не возврата'
+from Delivery as d 
+group by d.library_employer
+having (select count(d2.library_employer) from Delivery as d2 where DATEDIFF(day, d2.date_delivery, d2.date_return) > 2 and d2.library_employer = d.library_employer) > 1
+
+
+Task 5
+
+
+¬ывести отчетность по годам суммированием цен вз€тых книг в случае если это значение больше среднего значени€ цен всех книг
+
+select YEAR(d.date_return) as 'Year', sum(b.price) as 'Price per year',  (select AVG(b2.price) from Books as b2) as 'Average price in Books' from Delivery as d 
+inner join Books as b on d.book=b.regNumber
+group by YEAR(d.date_return)
+having sum(b.price) > (select AVG(b2.price) from Books as b2)

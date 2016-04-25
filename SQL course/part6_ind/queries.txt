@@ -1,4 +1,8 @@
+Lab 6 - Ind
+
 Task 1
+
+Вывести кол-во книг взятых каждым читателем в порядке возрастания
 
 select r.fio, count(r.reader_id) as 'count' from Readers as r inner join Delivery as d on r.reader_id=d.reader group by r.reader_id, r.fio
 order by count(r.reader_id)
@@ -23,7 +27,7 @@ Task 4
 
 Find out - what library employer had a lot cases of bad exident on not returning book in time
 
-select d.library_employer, col2 = (select count(d2.library_employer) from Delivery as d2 where DATEDIFF(day, d2.date_delivery, d2.date_return) > 2 and d2.library_employer = d.library_employer) 
+select d.library_employer, (select count(d2.library_employer) from Delivery as d2 where DATEDIFF(day, d2.date_delivery, d2.date_return) > 2 and d2.library_employer = d.library_employer) as col2
 from Delivery as d 
 group by d.library_employer
 having (select count(d2.library_employer) from Delivery as d2 where DATEDIFF(day, d2.date_delivery, d2.date_return) > 2 and d2.library_employer = d.library_employer) > 1
@@ -31,9 +35,9 @@ having (select count(d2.library_employer) from Delivery as d2 where DATEDIFF(day
 
 Task 5
 
-Get top 5 of most popular books in library
+Get top 3 of most popular books in library
 
-select top 5 b.author, b.title, count(d.book) as 'count' from Delivery as d inner join Books as b on d.book=b.regNumber
+select top 3 b.author, b.title, count(d.book) as 'count' from Delivery as d inner join Books as b on d.book=b.regNumber
 group by d.book, b.author, b.title
 order by count(d.book)
 
