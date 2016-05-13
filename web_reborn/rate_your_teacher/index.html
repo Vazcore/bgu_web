@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="rateApp">
+<head>
+	<meta charset="utf-8" />
+	<title>List</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">	
+	<link rel="stylesheet" type="text/css" href="css/style.css">	
+	<link rel="stylesheet" type="text/css" href="css/external_style.css">	
+</head>
+<body>
+
+	<header>
+		<div class="navbar-top"></div>
+		<div class="top_nav_inner">
+			<ul class="nav navbar-nav top_nav">
+				<li class="active"><a href="#">Dashboard</a></li>
+				<li><a href="#">Rating</a></li>
+				<li><a href="#">Teachers</a></li>
+			</ul>
+		</div>
+	</header>
+	<div class="cls"></div>
+
+	<div class="container" ng-controller="HomeController as HomeCtrl">
+
+		<div class="row">			
+			<article class="col-xs-12 col-sm-12 col-md-12">
+				<h2>Top 5 teachers</h2>
+				<div class="teacher" ng-repeat="teacher in topTeachers">
+					<r-teacher teacher="teacher"></r-teacher>
+				</div>			
+			</article>
+		</div>		
+		<div class="row">
+        	<r-info factor="col-md-4 col-sm-6" info="HomeCtrl.info"></r-info>      
+        	<r-info factor="col-md-4 col-sm-6" info="HomeCtrl.info"></r-info>      
+        	<r-info factor="col-md-4 col-sm-6" info="HomeCtrl.info"></r-info>              	
+    	</div>
+
+		<footer>
+			
+		</footer>
+
+	</div>
+
+	<script type="text/javascript" src="scripts/angular.js"></script>
+	<script type="text/javascript" src="scripts/underscore.js"></script>	
+	<script type="text/javascript" src="scripts/app.js"></script>
+	<script type="text/javascript" src="scripts/teacher.directive.js"></script>	
+	<script type="text/javascript" src="scripts/info.directive.js"></script>	
+</body>
+</html>

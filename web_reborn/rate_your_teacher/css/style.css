@@ -1,0 +1,50 @@
+.teacher .ava{
+	padding: 5px;
+}
+
+
+.cls{
+	clear: both;
+}
+
+.navbar-top{
+	background: #115C9B none repeat scroll 0% 0%;
+	height: 25px;
+}
+
+header{	
+	background: #1F76BD none repeat scroll 0% 0%;
+	color: white;
+	height: 85px;
+}
+
+header ul li a{
+	font-family: "Dosis",sans-serif;
+	font-size: 18px;
+	padding: 20px 15px;
+	color: white;
+}
+
+header ul li a:hover, header ul li.active a{
+	border-bottom: 3px solid white;
+	background-color: transparent !important;
+	color: white;
+}
+
+.top_nav{
+	float: right;	
+}
+
+.top_nav_inner{
+	width: 100%;
+}
+
+.top_nav_inner:after{
+	content: "";
+	clear: both;
+}
+
+.teacher{
+	display: inline-block;
+	padding-right: 10px;
+}

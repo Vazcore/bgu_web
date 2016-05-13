@@ -52,7 +52,7 @@ CREATE PROC PStudentNew
  execute PStudentNew 'Group 1';
  
  ----------------------------------
- USE University
+USE University
 GO
 CREATE PROC PStudentINSERT
 @NRecordBook VARCHAR(6),
