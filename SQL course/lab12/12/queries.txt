@@ -1,0 +1,62 @@
+Create database and user for this db and grant persmissions ALL
+
+create database base_for_user
+sp_addlogin 'alex1', '1234', 'base_for_user'
+use base_for_user
+sp_adduser 'alex1'
+grant all to alex1
+
+
+
+
+Create roll stud and give it to users alex1 and alex2
+
+sp_addrole 'stud'
+sp_addrolemember 'stud', 'alex1'
+sp_addlogin 'alex2', '1234', 'base_for_user'
+sp_adduser 'alex2'
+create table Products (id int, name varchar(255), price float);
+grant select, insert on Products to stud
+grant select, insert on Products to stud
+REVOKE INSERT ON Products TO stud
+
+# Individual tasks
+
+// Create 4 users for Library database 
+
+use Library;
+sp_addlogin 'user1', '1234', 'Library'
+sp_addlogin 'user2', '1234', 'Library'
+sp_addlogin 'user3', '1234', 'Library';
+sp_addlogin 'user4', '1234', 'Library';
+sp_addlogin 'user5', '1234', 'Library';
+sp_adduser 'user1'
+sp_adduser 'user2'
+sp_adduser 'user3';
+sp_adduser 'user4';
+
+// Adding role for owners of library
+sp_addrole 'library_owners'
+grant all to library_owners
+
+sp_addrolemember 'library_owners', 'user1'
+sp_addrolemember 'library_owners', 'user2'
+
+// Adding role for library employers
+sp_addrole 'library_workers'
+grant select,insert,update on Books to library_workers
+grant select,insert,update on Readers to library_workers
+grant select,insert,update on Delivery to library_workers
+
+sp_addrolemember 'library_workers', 'user3'
+sp_addrolemember 'library_workers', 'user4'
+
+// Adding role for readers
+sp_addrole 'library_readers'
+grant select on Books to library_readers
+sp_addrolemember 'library_readers', 'user5'
+
+
+
+
+
