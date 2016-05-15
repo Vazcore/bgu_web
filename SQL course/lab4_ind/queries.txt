@@ -1,0 +1,14 @@
+#1 Insert into books data
+
+insert into Books (regNumber, author,title,year,price,pageNumber,theme) values (10, 'Author1', 'Title1', 1920, 120, 300, 'Comedy');
+insert into Books (regNumber, author,title,year,price,pageNumber,theme) values (11, 'Author2', 'Title2', 1923, 123, 303, 'Comedy');
+
+#2 Updating data in table Books
+
+update Books set price=300 where regNumber=10;
+
+#3 Update title in all books to lowercase
+update Books set title=LOWER(title);
+
+#4 Delete books for authors - Shakespear
+delete from books where author like '%hakespeare%'
