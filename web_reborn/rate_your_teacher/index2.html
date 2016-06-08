@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Win</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">		
+</head>
+<body>
+	<div class="container" id="app">
+		<img src="img/trash/h1.png" width="100px" class="open_new active">
+	</div>
+
+	<script type="text/javascript">
+
+	var index = 0;
+	var imgs = ['img/trash/h2.png', 'img/trash/h3.jpg', 'img/trash/h4.jpg'];
+		
+	var app = document.querySelector("#app");
+	app.onclick = function(e){		
+		var t = e.target;
+		if (imgs[index] === undefined) {
+			alert('No more Hercules left');
+			return false;
+		}
+		t.setAttribute('src', imgs[index]);
+		index++;
+		/*if (t.tagName == 'IMG') {
+			var img = document.createElement('img');
+			img.setAttribute('src', imgs[index]);
+			app.appendChild(img);
+			index++;
+		}*/
+	};
+
+	</script>
+
+</body>
+</html>
