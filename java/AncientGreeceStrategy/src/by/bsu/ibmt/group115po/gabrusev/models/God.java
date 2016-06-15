@@ -5,25 +5,28 @@
  */
 package by.bsu.ibmt.group115po.gabrusev.models;
 
-import by.bsu.ibmt.group115po.gabrusev.utils.Logger;
+import by.bsu.ibmt.group115po.gabrusev.utils.MLogger;
 
 /**
  *
  * @author Alexey
  */
-public class God extends GodEntity {
+public class God extends GodEntity{
     
     public God(String name, int age, Power power, int points)
     {
         super(name, age, power, points);
         this.setBehaviour(new CasualRank());
+        MLogger.debug("God " + name + " was created!");
     }
     
     @Override
     public void introduce()
     {
-        Logger.log(this.getName(), "Hail mortal creratures I am a God " + this.getName());
-        Logger.log(this.getName(), "I live in this world " + this.getAge() + " years!!!");
-        Logger.log(this.getName(), "I have power - " + this.getPower().getName());
+        MLogger.log(this.getName(), "Hail mortal creratures I am a God " + this.getName());
+        MLogger.log(this.getName(), "I live in this world " + this.getAge() + " years!!!");
+        MLogger.log(this.getName(), "I have power - " + this.getPower().getName());
     }
+
+    
 }

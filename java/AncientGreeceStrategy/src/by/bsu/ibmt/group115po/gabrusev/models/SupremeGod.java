@@ -5,7 +5,7 @@
  */
 package by.bsu.ibmt.group115po.gabrusev.models;
 
-import by.bsu.ibmt.group115po.gabrusev.utils.Logger;
+import by.bsu.ibmt.group115po.gabrusev.utils.MLogger;
 
 /**
  *
@@ -16,14 +16,16 @@ public class SupremeGod extends GodEntity {
     {
         super(name, age, power, points);
         this.setBehaviour(new SupremeRank());
+        MLogger.debug("Supreme God " + name + " was created!");
     }
     
     @Override
     public void introduce()
     {
-        Logger.log(this.getName(), "Hail silly mortal creratures. You should fear me I am a Supreme God " + this.getName());
-        Logger.log(this.getName(), "I live in this world " + this.getAge() + " years!!!");
-        Logger.log(this.getName(), "I have power - " + this.getPower().getName());
-        Logger.log(this.getName(), "I can take immortality from God");
+        MLogger.log(this.getName(), "Hail silly mortal creratures. You should fear me I am a Supreme God " + this.getName());
+        MLogger.log(this.getName(), "I live in this world " + this.getAge() + " years!!!");
+        MLogger.log(this.getName(), "I have power - " + this.getPower().getName());
+        MLogger.log(this.getName(), "I can take immortality from God");
     }
+    
 }

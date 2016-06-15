@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="ratingApp">
+    <head>
+        <meta charset="utf-8">
+        <title>Rate Education</title>
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+        <link rel="stylesheet" href="css/style.css" media="screen" title="no title" charset="utf-8">
+    </head>
+    <body>
+        <div class="container main_layout shadow_block">
+            <nav class="navigation" ng-controller="NavigationController">
+                <div class="logo row-block">
+                    <a href="#!/home">
+                        <img src="img/logo.jpg" height="120px" alt="" />
+                    </a>
+                </div>
+                <div class="row-block float-right" app-navigation></div>
+            </nav>
+            <hr />
+
+            <div ng-view></div>
+        </div>
+
+        <!-- Scripts -->
+        <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
+        <script type="text/javascript" src="bower_components/lodash/dist/lodash.min.js"></script>
+        <script type="text/javascript" src="scripts/app.js"></script>
+        <script type="text/javascript" src="scripts/custom/custom.directive.js"></script>
+        <script type="text/javascript" src="scripts/custom/custom.service.js"></script>
+        <script type="text/javascript" src="scripts/custom/navigation.controller.js"></script>
+        <script type="text/javascript" src="scripts/about/about.js"></script>
+        <script type="text/javascript" src="scripts/home/home.js"></script>
+        <script type="text/javascript" src="scripts/propose/propose.js"></script>
+        <script type="text/javascript" src="scripts/univs/univs.js"></script>
+        <script type="text/javascript" src="scripts/contacts/contacts.js"></script>
+    </body>
+</html>

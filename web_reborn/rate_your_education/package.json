@@ -1,0 +1,15 @@
+{
+  "name": "rate_education",
+  "version": "1.0.0",
+  "description": "Rating App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alexey Gabrusev",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-connect": "^1.0.2"
+  }
+}

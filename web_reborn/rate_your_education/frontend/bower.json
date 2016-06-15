@@ -1,0 +1,27 @@
+{
+  "name": "Rate Education",
+  "homepage": "https://github.com/Vazcore/bgu_web",
+  "authors": [
+    "Aliaksei Habruseu <alexgabrusev@gmail.com>"
+  ],
+  "description": "Rating application",
+  "main": "",
+  "keywords": [
+    "rating",
+    "education"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "angular": "^1.5.6",
+    "lodash": "^4.13.1",
+    "angular-route": "^1.5.6"
+  }
+}

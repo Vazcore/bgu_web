@@ -5,11 +5,13 @@
  */
 package by.bsu.ibmt.group115po.gabrusev.models;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Alexey
  */
-public class Power {
+public class Power implements Serializable{
     private String name;
     private int value;
     

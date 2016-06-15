@@ -5,11 +5,13 @@
  */
 package by.bsu.ibmt.group115po.gabrusev.models;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Alexey
  */
-public abstract class Creature {
+public abstract class Creature implements Serializable {
    
     private String name;
     private int age;
@@ -40,6 +42,12 @@ public abstract class Creature {
     public int getAge() 
     {
         return this.age;
+    }
+    
+    @Override
+    public String toString() {
+        String SClass = this.getClass().getSimpleName();
+        return "class:" + SClass + ";" + "name:" + this.getName() + ";" + "age:" + this.getAge();
     }
     
 }

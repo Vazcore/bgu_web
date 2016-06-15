@@ -1,0 +1,9 @@
+<ul ng-if="navLinks" class="nav-links">
+    <li ng-repeat="link in navLinks track by link.href"
+        ng-if="link.visible">
+        <a ng-href="{{link.href}}"
+           ng-class="{active: link.active}">
+           {{link.title}}
+       </a>
+    </li>
+</ul>

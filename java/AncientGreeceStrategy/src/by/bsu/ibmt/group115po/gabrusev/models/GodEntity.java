@@ -6,7 +6,7 @@
 package by.bsu.ibmt.group115po.gabrusev.models;
 
 import by.bsu.ibmt.group115po.gabrusev.models.interfaces.GodBehavior;
-import by.bsu.ibmt.group115po.gabrusev.utils.Logger;
+import by.bsu.ibmt.group115po.gabrusev.utils.MLogger;
 
 
 /**
@@ -63,13 +63,18 @@ public abstract class GodEntity extends Creature {
     
     public void atack(GodEntity cr)
     {
-        Logger.log(this.getName(), "I will kill you, " + cr.getName());
+        MLogger.log(this.getName(), "I will kill you, " + cr.getName());
         rankingBehaviour.atack(this, cr);
     }
     
     public void takeImmortality(GodEntity cr)
     {
         rankingBehaviour.takeImmortality(this, cr);
+    }
+    
+    @Override
+    public String toString() {
+        return super.toString() + ";" + "power:" + this.getPower().getName() + ";" + "power_value:" + this.getPower().getValue() + ";" + "points:" + this.getPoints();
     }
     
 }
