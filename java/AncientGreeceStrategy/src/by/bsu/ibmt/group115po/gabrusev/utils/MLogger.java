@@ -36,18 +36,18 @@ public class MLogger {
     
     public static void log(String who, String text)
     {        
-        System.out.println("Log #" + System.currentTimeMillis());
-        String log = who + " say: \n" + text;
-        System.out.println(log);        
-        System.out.println("===================================");
+        //System.out.println("Log #" + System.currentTimeMillis());
+        String log = who + " say: \n" + text + "\n============================\n";
+        /*System.out.println(log);        
+        System.out.println("===================================");*/
         logger.warn(log);
     }
     
     public static void info(String info) {
-        System.out.println("Info Log:");
+        /*System.out.println("Info Log:");
         System.out.println(info);
-        System.out.println("===================================");        
-        logger.info(info);
+        System.out.println("===================================");*/
+        logger.info(info + "\n============================\n");
     }
     
     public static void debug(String text) {

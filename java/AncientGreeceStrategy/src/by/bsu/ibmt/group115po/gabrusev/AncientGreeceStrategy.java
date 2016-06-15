@@ -39,8 +39,7 @@ public class AncientGreeceStrategy {
         
         // Read from file
         MLogger.debug("Unserializing God");
-        Object god_loaded = Saver.load("gods.bin");
-        
+        cupid = (God) Saver.load("gods.bin");
                 
         // Creation of God Zeus
         Power lighting = new Power("Lighting", 150);
