@@ -2,7 +2,9 @@
 	padding: 5px;
 }
 
-
+body{
+	color: black;
+}
 .cls{
 	clear: both;
 }
@@ -12,23 +14,46 @@
 	height: 25px;
 }
 
-header{	
+.design_2  {
+	background-color: yellow;
+}
+
+.design_1 header{	
 	background: #1F76BD none repeat scroll 0% 0%;
 	color: white;
 	height: 85px;
 }
 
-header ul li a{
+.design_1 header ul li a{
 	font-family: "Dosis",sans-serif;
 	font-size: 18px;
 	padding: 20px 15px;
 	color: white;
 }
 
-header ul li a:hover, header ul li.active a{
+.design_1 header ul li a:hover, header ul li.active a{
 	border-bottom: 3px solid white;
 	background-color: transparent !important;
 	color: white;
+}
+
+.design_2 header{	
+	background: red none repeat scroll 0% 0%;
+	color: white;
+	height: 85px;
+}
+
+.design_2 header ul li a{
+	font-family: "Arial",sans-serif;
+	font-size: 18px;
+	padding: 20px 15px;
+	color: white;
+}
+
+.design_2 header ul li a:hover, header ul li.active a{
+	border-bottom: 3px solid white;
+	background-color: transparent !important;
+	color: green;
 }
 
 .top_nav{
