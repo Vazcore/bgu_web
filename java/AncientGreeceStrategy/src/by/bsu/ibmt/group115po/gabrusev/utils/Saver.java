@@ -10,19 +10,37 @@ import by.bsu.ibmt.group115po.gabrusev.models.Power;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Map;
-import jdk.nashorn.internal.runtime.JSType;
+
 
 /**
  *
  * @author Aliaksei_Habruseu
  */
 public class Saver {
+    
+    public static void save(Object obj, String filename) throws FileNotFoundException, IOException {
+        FileOutputStream fos = new FileOutputStream(filename);
+        BufferedOutputStream bos = new BufferedOutputStream(fos);
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
+        oos.writeObject(obj);
+        oos.close();
+    }
+    
+    public static Object load(String  filename) throws FileNotFoundException, IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(filename);
+        BufferedInputStream bis = new BufferedInputStream(fis);
+        ObjectInputStream ois = new ObjectInputStream(bis);
+        Object obj = ois.readObject();        
+        ois.close();
+        return obj;
+    }
     
     public static void serialize(Object obj, String filename) throws IOException {
         FileOutputStream fos = new FileOutputStream(filename);
@@ -43,8 +61,8 @@ public class Saver {
         }
         
         if (map.get("class") == "God") {
-            Power power = new Power(map.get("power"), JSType.toInt32(map.get("power_value")));
-            obj = new God(map.get("name"), JSType.toInt32(map.get("age")), power, JSType.toInt32(map.get("points")));
+            Power power = new Power(map.get("power"),  Integer.parseInt(map.get("power_value")));
+            obj = new God(map.get("name"), Integer.parseInt(map.get("age")), power, Integer.parseInt(map.get("points")));
         }
         
         return obj;

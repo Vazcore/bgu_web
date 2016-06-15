@@ -6,8 +6,8 @@
 package by.bsu.ibmt.group115po.gabrusev;
 
 import by.bsu.ibmt.group115po.gabrusev.models.God;
-import by.bsu.ibmt.group115po.gabrusev.models.Power;
 import by.bsu.ibmt.group115po.gabrusev.models.GodEntity;
+import by.bsu.ibmt.group115po.gabrusev.models.Power;
 import by.bsu.ibmt.group115po.gabrusev.models.SupremeGod;
 import by.bsu.ibmt.group115po.gabrusev.utils.MLogger;
 import by.bsu.ibmt.group115po.gabrusev.utils.Saver;
@@ -35,11 +35,11 @@ public class AncientGreeceStrategy {
         
         // Save to file
         MLogger.debug("Serializing God");
-        Saver.serialize(cupid, "gods.bin");
+        Saver.save(cupid, "gods.bin");
         
         // Read from file
         MLogger.debug("Unserializing God");
-        Object god_loaded = Saver.deserialize("gods.bin");
+        Object god_loaded = Saver.load("gods.bin");
         
                 
         // Creation of God Zeus
