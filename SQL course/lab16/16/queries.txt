@@ -123,9 +123,10 @@ print 'Count of remarks = ' + cast(@count as char(20))
 
 declare @str nvarchar(1000)
 declare @pos int
-declare @c_o int, @c_b int
+declare @c_o int, @c_b int, @c_n int
 set @c_o = 0
 set @c_b = 0
+set @c_n = 0
 set @str = 'To   be  or not  to  be   '
 
 set @pos = CHARINDEX('o', @str)
@@ -135,6 +136,152 @@ begin
   set @pos = CHARINDEX('o', @str, @pos + 1);
 end
 
-print @c_o
+set @pos = CHARINDEX('b', @str)
+while @pos > 0
+begin
+  set @c_b = @c_b + 1
+  set @pos = CHARINDEX('b', @str, @pos + 1);
+end
+
+set @pos = CHARINDEX('n', @str)
+while @pos > 0
+begin
+  set @c_n = @c_n + 1
+  set @pos = CHARINDEX('n', @str, @pos + 1);
+end
+
+print 'Count - O: ' + cast(@c_o as char(20))
+print 'Count - B: ' + cast(@c_b as char(20))
+print 'Count - N: ' + cast(@c_n as char(20))
+
+10. ѕодсчитать доли процентов встречи следующих букв: "е", "о", 
+
+declare @str nvarchar(1000)
+declare @pos int
+declare @c_o int, @c_b int, @len int
+declare @p_o float, @p_b float
+set @c_o = 0
+set @c_b = 0
+
+set @str = 'To   be  or not  to  be   '
+set @len = len(@str)
+set @pos = CHARINDEX('o', @str)
+while @pos > 0
+begin
+  set @c_o = @c_o + 1
+  set @pos = CHARINDEX('o', @str, @pos + 1);
+end
+
+set @pos = CHARINDEX('b', @str)
+while @pos > 0
+begin
+  set @c_b = @c_b + 1
+  set @pos = CHARINDEX('b', @str, @pos + 1);
+end
 
 
+print 'O: ' + cast(@c_o * 100 / @len as char(3)) + '%'
+print 'B: ' + cast(@c_b * 100 / @len as char(3)) + '%'
+
+11. ѕо правилам оформлени€ машинописных текстов перед знаками .,!?:; пробелы 
+не став€тс€, но об€зательно став€тс€ после этих знаков. ”далите лишние пробелы. 
+ѕодсчитать количество исправлений.
+
+declare @str nvarchar(1000)
+declare @res nvarchar(1000)
+declare @pos int, @len int, @remarks int
+
+set @str = 'Text1   ? Text2 !. Change ,'
+set @res = ''
+set @len = len(@str)
+set @remarks = 0
+set @pos = patindex('% [?!,.]%', @str)
+while @pos > 0
+begin
+	set @res = @res + substring(@str, 1, @pos)
+	set @remarks = @remarks + 1
+	set @res = RTRIM(@res)
+	set @str = SUBSTRING(@str, @pos + 1, len(@str))
+	set @pos = patindex('% [?!,.]%', @str)
+end
+set @res = @res + @str
+
+print @res
+print 'All Remarks: ' + cast(@remarks as char)
+
+
+12. ѕо правилам оформлени€ машинописных текстов перед знаками .,!?:; пробелы не став€тс€, 
+но об€зательно став€тс€ после этих знаков. –асставьте недостающие пробелы. 
+ѕодсчитать количество исправлений.
+
+declare @str nvarchar(1000)
+declare @res nvarchar(1000)
+declare @pos int, @len int, @remarks int
+
+set @str = 'Text1   ?Text2!Change,'
+set @res = ''
+set @len = len(@str)
+set @remarks = 0
+set @pos = patindex('%[?!,.][^ ]%', @str)
+while @pos > 0
+begin
+	set @res = @res + substring(@str, 1, @pos) + space(1)
+	set @remarks = @remarks + 1	
+	set @str = SUBSTRING(@str, @pos + 1, len(@str))
+	set @pos = patindex('%[?!,.][^ ]%', @str)
+end
+set @res = @res + @str
+
+print @res
+print 'All Remarks: ' + cast(@remarks as char)
+
+13. Ќайти из исходного текста второе предложение и вернуть его в переменную Perem, 
+а также вывести на экран весь исходный текст и найденное предложение.
+
+declare @str nvarchar(1000)
+declare @perem nvarchar(1000)
+declare @orig nvarchar(1000)
+declare @pos int, @it int
+set @it = 0
+
+set @str = 'Sentence 1! Sentence 2. Sentence 3 ?'
+set @orig = @str
+set @pos = patindex('%[?!.]%', @str)
+while (@pos > 0 and @it < 2)
+begin
+	set @it = @it + 1
+	set @perem = SUBSTRING(@str, 1, @pos)
+	set @str = SUBSTRING(@str, @pos + 1, len(@str))
+	
+	set @pos = patindex('%[?!.]%', @str)
+end
+
+print 'All text: "' + @orig + '"'
+print '2nd sentence: "' + @perem + '"'
+
+
+14. ”далить из базового текста 2, 4, 6, 8 слова.
+
+declare @str nvarchar(1000)
+declare @res nvarchar(1000)
+
+declare @pos int, @it int
+set @it = 0
+
+set @str = 'Sentence word1 word2 word3 word4 word5 Sentence. Sentence 3 ?'
+set @res = ''
+
+set @pos = patindex('% %', @str)
+while (@pos > 0)
+begin
+	set @it = @it + 1	
+	if @it != 2 and @it != 4 and @it != 6  and @it != 8
+	begin
+		set @res = @res + SUBSTRING(@str, 1, @pos)
+	end
+	set @str = SUBSTRING(@str, @pos + 1, len(@str))	
+	set @pos = patindex('% %', @str)
+end
+
+
+print @res
