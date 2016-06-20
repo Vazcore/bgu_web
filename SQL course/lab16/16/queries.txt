@@ -1,0 +1,140 @@
+1. Создать статический курсор по данным таблицы Books с полями
+Code_book, Title_book.
+
+DECLARE MyCursor1 CURSOR FOR (select Code_book, Title_book from Books)
+
+2. Создать динамический курсор по данным таблицы поставщиков (таблица Deliveries) с полями Name_delivery, Name_company.
+
+DECLARE MyCursor1 INSENSITIVE CURSOR FOR (select Code_book, Title_book from Books)
+
+3. Создать статический курсор по данным таблицы Books и Authors с полями:
+ Code_book, Title_book, Name_author.
+
+DECLARE MyCursorAuthor INSENSITIVE CURSOR FOR (select Code_book, Title_book, name_author from Books, Author)
+
+4. Создать статический курсор по данным таблицы Books и Publishing_house с полями:
+ Code_book, Title_book, Publish.
+
+DECLARE MyCursorAuthorPublish INSENSITIVE CURSOR FOR (select Code_book, Title_book, publish from Books, Publishing_house)
+
+5. Создать динамический курсор для чтения по данным таблицы Deliveries с полями 
+Code_delivery, Name_delivery. 
+
+DECLARE MyCursorDeliverys CURSOR FOR (select Code_delivery, Name_delivery from Deliveries) Вывести данные 3-й записи.
+
+DECLARE MyCursorDeliverys2 SCROLL  CURSOR FOR (select Code_delivery, Name_delivery from Deliveries)
+declare @a1 int
+declare @a2 varchar(100)
+declare @it int
+set @it = 0
+OPEN MyCursorDeliverys2
+FETCH FIRST FROM MyCursorDeliverys2 INTO @a1, @a2
+WHILE @@FETCH_STATUS = 0
+BEGIN
+FETCH NEXT FROM MyCursorDeliverys2 INTO @a1, @a2
+if @it = 3 
+	begin
+		print @a1
+		print @a2
+	end
+	set @it = @it + 1;	
+END
+CLOSE MyCursorDeliverys2
+DEALLOCATE MyCursorDeliverys2
+
+
+6. Сделать текущей БД db_books. Поместить в курсор данные таблицы Purchases. 
+Перебрать все записи таблицы Purchases. Просуммировать значения произведений полей 
+Cost и Amount и результат сохранить в переменной Sum_table, которую после суммирования 
+вывести на экран. Закрыть и удалить из памяти курсор.
+
+use db_books
+DECLARE MyCursorPurch SCROLL  CURSOR FOR (select p.Amount, p.Cost from Purchases as p)
+declare @sum float
+declare @amount int
+declare @price float
+set @sum = 0
+OPEN MyCursorPurch
+FETCH FIRST FROM MyCursorPurch INTO @amount, @price
+set @sum = @sum + (@price * @amount)
+WHILE @@FETCH_STATUS = 0
+BEGIN
+FETCH NEXT FROM MyCursorPurch INTO @amount, @price
+	set @sum = @sum + (@price * @amount)
+END
+print 'Total price = ' + cast(@sum as char(20))
+CLOSE MyCursorPurch
+DEALLOCATE MyCursorPurch
+
+7. Объявить статический курсор по данным таблиц Authors и Books. Вывести данные 5-й записи.
+
+DECLARE MyCursorDeliverysBooks12 SCROLL  CURSOR FOR (select Code_delivery, Name_delivery, b.Title_book, b.Pages from Deliveries, Books as b)
+declare @a1 int
+declare @a2 varchar(100)
+declare @a3 char(100)
+declare @a4 int
+declare @it int
+set @it = 0
+OPEN MyCursorDeliverysBooks12
+FETCH FIRST FROM MyCursorDeliverysBooks12 INTO @a1, @a2, @a3, @a4
+WHILE @@FETCH_STATUS = 0
+BEGIN
+FETCH NEXT FROM MyCursorDeliverysBooks12 INTO @a1, @a2, @a3, @a4
+if @it = 5 
+	begin
+		print @a1
+		print @a2
+		print @a3
+		print @a4
+	end
+	set @it = @it + 1;	
+END
+CLOSE MyCursorDeliverysBooks12
+DEALLOCATE MyCursorDeliverysBooks12
+
+8. Удалить в тексте лишние пробелы. Лишними считаются те, которые идут непосредственно 
+за пробелом. Подсчитать количество исправлений.
+
+
+declare @str nvarchar(1000)
+declare @res nvarchar(1000)
+declare @len int
+declare @pos int
+declare @count int
+set @count = 0
+set @str = 'To   be  or not  to  be   '
+set @res = ''
+set @len = LEN(@str)
+while CHARINDEX('  ', @str) > 0
+begin
+  set @pos = CHARINDEX('  ', @str);
+  set @res = @res + SUBSTRING(@str, 1, @pos - 1)    
+  set @str = SUBSTRING(@str, @pos + 1, @len - @pos)    
+  set @count = @count + 1
+end
+set @res = @res + @str
+print @res
+print 'Count of remarks = ' + cast(@count as char(20))
+
+
+9. Подсчитать количество встреч каждой из следующих букв: "а", "в","и", "п" в 
+базовом тексте.
+
+
+declare @str nvarchar(1000)
+declare @pos int
+declare @c_o int, @c_b int
+set @c_o = 0
+set @c_b = 0
+set @str = 'To   be  or not  to  be   '
+
+set @pos = CHARINDEX('o', @str)
+while @pos > 0
+begin
+  set @c_o = @c_o + 1
+  set @pos = CHARINDEX('o', @str, @pos + 1);
+end
+
+print @c_o
+
+

@@ -1,0 +1,191 @@
+
+1. Проверить работу описанной установки SET QUOT-ED_IDENTIFIER. 
+
+SET QUOTED_IDENTIFIER OFF
+SELECT "sometext" AS Value 
+
+===================
+2. Проверить работу описанной установки SET DATEFIRST. 
+
+SET DATEFIRST 1;
+SELECT CAST('2016-06-20' AS datetime2) AS SelectDate  
+    ,DATEPART(dw, '2016-06-20') AS DayOfWeek;  
+
+===========================
+
+3. Объявить переменную Perem1 типа денежный, а переменную Perem2 типа число с целой частью равной 8 и дробной частью равной 2
+
+declare @perem1 money
+declare @perem2 numeric(8,2)
+
+===========================
+
+4.	Объявить переменную Perem1 типа строка длиной 100, а пере-менную Perem2 типа длинное целое. 
+
+declare @perem1 char(100)
+declare @perem2 bigint
+
+5.	Объявить переменную Perem1 типа динамическая строка с мак-симальной длиной 1000, а переменную Perem2 типа целое число. 
+
+declare @perem1 nvarchar(1000)
+declare @perem2 int
+
+6.	Объявить переменную Perem1 типа строка длиной 30, а переменную Perem2 типа число с целой частью равной 10 и дробной частью равной 3. 
+
+declare @perem1 char(30)
+declare @perem2 numeric(10,3)
+
+7.	Объявить переменную Perem1 типа дата/ время, а переменную Perem2 типа число в диапазоне от 0 до 255. 
+
+declare @perem1 Date
+declare @perem2 tinyint
+
+8. Подсчитать среднюю цену закупленных книг (с помощью запроса SELECT) и умножить ее на значение 123,34, которое необходимо сохра-нить в отдельной переменной, вывести значение переменной на экран. 
+
+declare @avg float
+declare @add float
+set @add = 123.34
+set @avg = (select AVG(cost*amount) from Purchases) * @add
+select @avg
+
+9.	Подсчитать суммарную цену всех закупок книг, результат по-местить в переменную, вывести значение переменной на экран. 
+
+declare @sum float
+set @sum = (select sum(cost*amount) from Purchases)
+select @sum
+
+10.	Подсчитать количество книг в справочнике книг, результат поместить в переменную, вывести значение переменной на экран. 
+
+declare @count int
+set @count = (select count(*) from Books)
+select @count
+
+11.	Определить минимальную дату рождения автора в справочнике авторов, результат поместить в переменную, вывести значение пере-менной на экран. 
+
+declare @min datetime
+set @min = (select min(Birthday) from Author)
+select @min
+
+12.	Подсчитать количество поставщиков книг, результат по-местить в переменную. 
+
+declare @count int
+set @count = (select count(*) from Deliveries)
+select @count
+
+13.	Подсчитать сумму закупок книг, результат поместить в переменную. 
+
+declare @sum float
+set @sum = (select sum(cost*amount) from Purchases)
+select @sum
+
+14.	Подсчитать среднюю цену в таблице покупок книг, ре-зультат поместить в переменную
+
+declare @avg float
+set @avg = (select AVG(cost*amount) from Purchases)
+select @avg
+
+15.	Подсчитать максимальную стоимость книг в закупке, ре-зультат поместить в переменную
+
+declare @max float
+set @max = (select max(cost*amount) from Purchases)
+select @max
+
+16.	Определить переменную Date1 типа дата/время. Присвоить ей значение даты 31.12.2006 в формате dd.mm.yyyy. 
+
+declare @date1 datetime
+set @date1 = '01.03.2016'
+select @date1
+
+17.	Определить переменную Date1 типа дата/время. Присвоить ей значение даты 31.12.2006 в формате mm.dd.yyyy. 
+
+declare @date1 datetime
+set @date1 = '03.02.2016'
+select @date1
+
+18.	Определить переменную Date1 типа дата/время. Присвоить ей значение даты 31.12.2006 в формате yyyy.mm.dd. 
+
+declare @date1 datetime
+set @date1 = '2016.03.02'
+select @date1
+
+19.	Создать локальную таблицу с названием TEMP и полями типа дата/время, длинное целое, строка. Добавить в нее две записи с данными и вывести результат на экран. 
+
+declare @table TABLE (date datetime, sum bigint, name char(100))
+insert into @table (date,sum, name) values ('2016.03.01', 200, 'Alexey')
+select * from @table
+
+20.	Создать локальную таблицу с названием TEMP и полями типа длинное целое, строка и значением по умолчанию «введите что-нибудь», 
+
+declare @table TABLE (date datetime, sum bigint, name char(100) default 'empty string')
+insert into @table (date,sum) values ('2016.03.01', 200)
+select * from @table
+
+21.	Создать локальную таблицу с названием TEMP и полями типа целое, динамическая строка, бит со значением по умолча-нию «1». Добавить в нее две записи с данными и вывести резуль-тат на экран. 
+
+declare @table TABLE (sum int, name varchar(255) default 'empty string', b bit default 1)
+insert into @table (sum,name,b) values (200, 'Alexey', 100)
+insert into @table (sum,name,b) values (300, 'Natasha', 200)
+select * from @table
+
+22.	Создать локальную таблицу с названием TEMP и полями типа дата/время, длинное целое, строка. Добавить в нее две запи-си с данными и вывести результат на экран. 
+
+declare @table TABLE (date datetime, sum bigint, name char(100))
+insert into @table (date,sum, name) values ('2016.03.01', 200, 'Alexey')
+insert into @table (date,sum, name) values ('2016.03.01', 200, 'Nikolas')
+select * from @table
+
+23.	Создать локальную таблицу с названием TEMP и полями типа дата/время, длинное целое с автонаращиванием, динамиче-ская строка. Добавить в нее две записи с данными и вывести результат на экран. 
+
+declare @table TABLE (date datetime, sum bigint identity(0,1), name char(100))
+insert into @table (date, name) values ('2016.03.01', 'Alexey')
+insert into @table (date, name) values ('2016.03.01',  'Nikolas')
+select * from @table
+
+24.Объявить переменные типа FLOAT, CHAR, TINYINT. Присвоить значения, соответствующие типам. Выполнить преобразование переменных типа FLOAT, CHAR, TINYINT в INT, DATETIME, BIT соответственно и вывести результат на экран. 
+
+declare @f float
+declare @ch char(20)
+declare @tint tinyint
+
+set @f = 1.2
+set @ch = '2016.05.02'
+set @tint = 10
+
+select CAST(@f as int), CAST(@ch as datetime), CAST(@tint as bit)
+
+25.	Объявить переменные типа INT, DATETIME, BIT. Присво-ить значения, соответствующие типам. Выполнить преобразова-ние переменных типа INT, DATETIME, BIT в FLOAT, CHAR, TI-NYINT соответственно и вывести результат на экран. 
+
+declare @f int
+declare @ch datetime
+declare @tint bit
+
+set @f = 12
+set @ch = '2016.05.02'
+set @tint = 3
+
+select CAST(@f as float), CAST(@ch as CHAR(30)), CAST(@tint as tinyint)
+
+26.	Объявить переменные типа NUMERIC, VARCHAR, DATETIME. 
+Присвоить значения, соответствующие типам. Выполнить пре-образование переменных типа NUMERIC, VARCHAR, DATETIME в FLOAT, CHAR, BIGINT соответственно и вывести результат на экран. 
+
+declare @f numeric(3,2)
+declare @ch varchar(100)
+declare @tint datetime
+
+set @f = 2.12
+set @ch = 'Alexey'
+set @tint = '2000.03.01'
+
+select CAST(@f as float), CAST(@ch as CHAR(30)), CAST(@tint as bigint)
+
+27.	Объявить переменные типа BIT, NVARCHAR, DATETIME. Присвоить значения, соответствующие типам. Выполнить преобразование переменных типа BIT, NVARCHAR, DATETIME в FLOAT, INT, BIGINT соответственно и вывести результат на экран. 
+
+declare @f bit
+declare @ch nvarchar(1000)
+declare @tint datetime
+
+set @f = 1
+set @ch = '12121212'
+set @tint = '2000.03.01'
+
+select CAST(@f as float), convert(int, @ch), CAST(@tint as bigint)
