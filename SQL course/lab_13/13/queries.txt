@@ -1,0 +1,7 @@
+
+
+declare @a int, @b numeric(10,2), @str char(20)
+
+declare @a int, @b numeric(10,2), @str char(20)
+
+

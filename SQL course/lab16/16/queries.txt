@@ -287,7 +287,7 @@ end
 print @res
 
 
-15. Удалить из базового текста 3, 5, 7, 10 слова.
+15. Удалить из базового текста 3, 5, 7 слова.
 
 declare @str nvarchar(1000)
 declare @res nvarchar(1000)
@@ -317,34 +317,22 @@ print @res
 16. Вставить в базовый текст вместо букв «а» - «АА».
 
 declare @str nvarchar(1000)
-declare @pos int
+
 set @str = 'abracadabraa'
 
-set @pos = charindex('a', @str)
 
-while @pos > 0
-begin
-	repace(@str, '%a%', 'A')
-	set @pos = charindex('a', @str)
-end
-
+set @str = REPLACE(@str, 'a', 'A')
 print @str
 
 
-17. Вставить в базовый текст вместо букв «е» и «о» - «ББ».
+17. Вставить в базовый текст вместо букв o,a => B.
 
 declare @str nvarchar(1000)
 declare @pos int
 set @str = 'abracadabraaoeeeooeesdsdeee name age'
 
-set @pos = patindex('%[oe]%', @str)
-
-while @pos > 0
-begin
-	repace(@str, '%[oe]%', 'B')
-	set @pos = patindex('%[oe]%', @str)
-end
-
+set @str = replace(@str, 'e', 'B')
+set @str = replace(@str, 'a', 'B')
 print @str
 
 
@@ -391,12 +379,12 @@ print @res
 declare @str nvarchar(1000), @d datetime
 set @d = cast(getdate() as datetime)
 set @str = 'Сегодня: День = ...d, Месяц = ...m Год = ...y, Часов = ...h, Минут = ...mins,Секунд= ...s'
-replace(@str, '%...d%', cast(datepart(day, @d) as char(10)))
-replace(@str, '%...m%', cast(datepart(month, @d) as char(20)))
-replace(@str, '%...y%', cast(datepart(year, @d) as char(10)))
-replace(@str, '%...h%', cast(datepart(hour, @d) as char(10)))
-replace(@str, '%...mins%', cast(datepart(minute, @d) as char(10)))
-replace(@str, '%...s%', cast(datepart(second, @d) as char(10)))
+set @str = replace(@str, '...d', cast(datepart(day, @d) as char(2)))
+set @str = replace(@str, '...m', cast(datepart(month, @d) as char(2)))
+set @str = replace(@str, '...y', cast(datepart(year, @d) as char(4)))
+set @str = replace(@str, '...h', cast(datepart(hour, @d) as char(2)))
+set @str = replace(@str, '...mins', cast(datepart(minute, @d) as char(2)))
+set @str = replace(@str, '...s', cast(datepart(second, @d) as char(2)))
 
 print @str
 
@@ -405,11 +393,11 @@ print @str
 
 declare @perem nvarchar(1000), @d datetime
 set @d = cast(getdate() as datetime)
-set @str = 'Today time bla bla bla'
+set @perem = 'Today time bla bla bla'
 
-replace(@str, '%time%', 'time ' + cast(datepart(hour, @d) as char(10)) + ':' + cast(datepart(minute, @d) as char(10)) + ':' + cast(datepart(second, @d) as char(10)))
+set @perem = replace(@perem, 'time', 'time ' + cast(datepart(hour, @d) as char(2)) + ':' + cast(datepart(minute, @d) as char(3)) + ':' + cast(datepart(second, @d) as char(3)))
 
-print @str
+print @perem
 
 22.  if (|a^2 - b^2| < 10x) => a^x - e^x + b^3cos(4x-0.2)
      
@@ -422,13 +410,13 @@ set @b = 1.2
 set @x = 1.5
 set @e = 2.71828182845905
 
-if abs(power(a, 2) - power(b, 2)) < 10 * x
+if abs(power(@a, 2) - power(@b, 2)) < 10 * @x
 begin
 	set @res = power(@a, @x) - power(@e, @x) + power(@b,3) * 3 * cos(4*@x-0.2)
 end
 else
 begin
-	set @res = tan(4.5*x) + (@x / sin(0.5*x))
+	set @res = tan(4.5*@x) + (@x / sin(0.5*@x))
 end
 
 print @res
