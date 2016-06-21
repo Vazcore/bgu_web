@@ -285,3 +285,152 @@ end
 
 
 print @res
+
+
+15. Удалить из базового текста 3, 5, 7, 10 слова.
+
+declare @str nvarchar(1000)
+declare @res nvarchar(1000)
+
+declare @pos int, @it int
+set @it = 0
+
+set @str = 'Sentence word1 word2 word3 word4 word5 Sentence. Sentence 3 ?'
+set @res = ''
+
+set @pos = patindex('% %', @str)
+while (@pos > 0)
+begin
+	set @it = @it + 1	
+	if @it != 3 and @it != 5 and @it != 7  and @it != 10
+	begin
+		set @res = @res + SUBSTRING(@str, 1, @pos)
+	end
+	set @str = SUBSTRING(@str, @pos + 1, len(@str))	
+	set @pos = patindex('% %', @str)
+end
+
+
+print @res
+
+
+16. Вставить в базовый текст вместо букв «а» - «АА».
+
+declare @str nvarchar(1000)
+declare @pos int
+set @str = 'abracadabraa'
+
+set @pos = charindex('a', @str)
+
+while @pos > 0
+begin
+	repace(@str, '%a%', 'A')
+	set @pos = charindex('a', @str)
+end
+
+print @str
+
+
+17. Вставить в базовый текст вместо букв «е» и «о» - «ББ».
+
+declare @str nvarchar(1000)
+declare @pos int
+set @str = 'abracadabraaoeeeooeesdsdeee name age'
+
+set @pos = patindex('%[oe]%', @str)
+
+while @pos > 0
+begin
+	repace(@str, '%[oe]%', 'B')
+	set @pos = patindex('%[oe]%', @str)
+end
+
+print @str
+
+
+18. Поменять местами первое и последнее слова в базовом тексте.
+
+
+declare @str nvarchar(1000)
+declare @res nvarchar(1000)
+declare @w varchar(100)
+declare @pos int
+set @str = 'abracadabraaoeeeooeesdsdeee name age'
+
+set @pos = patindex('% [a-z]', @str)
+set @w = substring(@str, @pos, len(@str) - @pos)
+set @res = @w
+set @pos = patindex('[a-z] %', @str)
+set @w = substring(@str, 1, @pos)
+set @res = @res + substring(@str, @pos, len(@str) - len(@res) - len(@w))
+set @res = @res + @w
+
+print @res
+
+
+19. Вывести на экран название текущего месяца и текущее время. Записать в таблицу
+ Purchases в поле Date_order одинаковую дату поступления, которая равна 12.03.2000.
+
+ declare @d datetime
+ declare @month int, @hour int, @mins int
+ set @d = cast(getdate() as datetime)
+ set @month = datepart(month, @d)
+ set @hour = datepart(hour, @d)
+ set @mins = datepart(minute, @d)
+ 
+ print 'Month: ' + cast(@month as char(100))
+ print 'Time: ' + cast(@hour as char(100)) + ' : ' + cast(@mins as char(100))
+ 
+ insert into Purchases (Date_order) values ('2000.03.12')
+ 
+ 20. Разобрать на отдельные составляющие текущую дату и время и вывести значения 
+на экран в следующем порядке (вместо многоточий):
+"Сегодня: День = ...d, Месяц = ...m Год = ...y, Часов = ...h, Минут = ...mins,Секунд= ...s"
+
+
+declare @str nvarchar(1000), @d datetime
+set @d = cast(getdate() as datetime)
+set @str = 'Сегодня: День = ...d, Месяц = ...m Год = ...y, Часов = ...h, Минут = ...mins,Секунд= ...s'
+replace(@str, '%...d%', cast(datepart(day, @d) as char(10)))
+replace(@str, '%...m%', cast(datepart(month, @d) as char(20)))
+replace(@str, '%...y%', cast(datepart(year, @d) as char(10)))
+replace(@str, '%...h%', cast(datepart(hour, @d) as char(10)))
+replace(@str, '%...mins%', cast(datepart(minute, @d) as char(10)))
+replace(@str, '%...s%', cast(datepart(second, @d) as char(10)))
+
+print @str
+
+21. В исходный текст, сохраненный в переменной Perem, после слова "время " вставить 
+текущее время. Результат сохранить в той же переменной Perem и вывести на экран
+
+declare @perem nvarchar(1000), @d datetime
+set @d = cast(getdate() as datetime)
+set @str = 'Today time bla bla bla'
+
+replace(@str, '%time%', 'time ' + cast(datepart(hour, @d) as char(10)) + ':' + cast(datepart(minute, @d) as char(10)) + ':' + cast(datepart(second, @d) as char(10)))
+
+print @str
+
+22.  if (|a^2 - b^2| < 10x) => a^x - e^x + b^3cos(4x-0.2)
+     
+	 else                   => tg(4.5x) + (x / sin(0.5x)
+	 
+declare @a float, @b float, @x float, @res float, @e float
+
+set @a = 5.0
+set @b = 1.2
+set @x = 1.5
+set @e = 2.71828182845905
+
+if abs(power(a, 2) - power(b, 2)) < 10 * x
+begin
+	set @res = power(@a, @x) - power(@e, @x) + power(@b,3) * 3 * cos(4*@x-0.2)
+end
+else
+begin
+	set @res = tan(4.5*x) + (@x / sin(0.5*x))
+end
+
+print @res
+ 
+ 
