@@ -12,17 +12,13 @@ import controllers.GameBehaviour;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.nio.file.DirectoryNotEmptyException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -197,19 +193,15 @@ public class Saver {
     
     public static boolean removeFile(String filename) 
     {        
-        try {            
-            Path path = FileSystems.getDefault().getPath(filename);
-            Files.delete(path);
-        } catch (NoSuchFileException x) {
-            System.err.format("%s: no such" + " file or directory%n", filename);
-            return false;
-        } catch (DirectoryNotEmptyException x) {
-            System.err.format("%s not empty%n", filename);
-            return false;
-        } catch (IOException x) {            
-            System.err.println(x);
-            return false;            
+        try
+        {
+            File file = new File(filename);
+            return (file.delete());
         }
-        return true;
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 }
