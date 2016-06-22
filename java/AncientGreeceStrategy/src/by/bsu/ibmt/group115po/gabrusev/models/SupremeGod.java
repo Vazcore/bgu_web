@@ -27,5 +27,13 @@ public class SupremeGod extends GodEntity {
         MLogger.log(this.getName(), "I have power - " + this.getPower().getName());
         MLogger.log(this.getName(), "I can take immortality from God");
     }
+       
+        
+    public void heal() 
+    {
+        int val = this.getPoints() + this.getImmortalityValue();
+        this.setPoints(val);
+        MLogger.info("Supreme God " + this.getName() + " has healed by " + val);
+    }
     
 }

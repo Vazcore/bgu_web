@@ -76,5 +76,15 @@ public abstract class GodEntity extends Creature {
     public String toString() {
         return super.toString() + ";" + "power:" + this.getPower().getName() + ";" + "power_value:" + this.getPower().getValue() + ";" + "points:" + this.getPoints();
     }
+
+    public String getClassName() 
+    {
+        Class<?> enclosingClass = getClass().getEnclosingClass();
+        if (enclosingClass != null) {
+          return enclosingClass.getName();
+        } else {
+          return getClass().getName();
+        }
+    }
     
 }

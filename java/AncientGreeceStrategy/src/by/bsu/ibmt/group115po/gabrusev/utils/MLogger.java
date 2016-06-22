@@ -52,6 +52,11 @@ public class MLogger {
     
     public static void debug(String text) {
         System.out.println("===================================");
-        logger.debug(text);
+        logger.debug(text);        
+    }
+    
+    public static void fatal(String text) {
+        System.out.println("===================================");
+        logger.fatal(text);        
     }
 }

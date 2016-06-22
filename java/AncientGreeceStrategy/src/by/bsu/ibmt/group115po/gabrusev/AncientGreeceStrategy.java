@@ -5,13 +5,13 @@
  */
 package by.bsu.ibmt.group115po.gabrusev;
 
-import by.bsu.ibmt.group115po.gabrusev.models.God;
-import by.bsu.ibmt.group115po.gabrusev.models.GodEntity;
-import by.bsu.ibmt.group115po.gabrusev.models.Power;
-import by.bsu.ibmt.group115po.gabrusev.models.SupremeGod;
 import by.bsu.ibmt.group115po.gabrusev.utils.MLogger;
 import by.bsu.ibmt.group115po.gabrusev.utils.Saver;
+import controllers.GameBehaviour;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -22,39 +22,14 @@ public class AncientGreeceStrategy {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException{
         
         // Setting logger Level
-        MLogger.setLevel("debug");
+        MLogger.setLevel("debug");   
+        GameBehaviour.coreInit();
         
-        // Creation of God Cupid
-        // first create power
-        Power love = new Power("Love", 50);
-        GodEntity cupid = new God("Cupid", 3000, love, 30000);        
-        cupid.introduce();
         
-        // Save to file
-        MLogger.debug("Serializing God");
-        Saver.save(cupid, "gods.bin");
-        
-        // Read from file
-        MLogger.debug("Unserializing God");
-        cupid = (God) Saver.load("gods.bin");
-                
-        // Creation of God Zeus
-        Power lighting = new Power("Lighting", 150);
-        GodEntity zeus = new SupremeGod("Zues", 9000, lighting, 20000);
-        zeus.introduce();
-        
-        // Atacking
-        zeus.atack(cupid);
-        
-        // Taking immortality        
-        zeus.takeImmortality(cupid);
-        
-        zeus.atack(cupid);
-        zeus.takeImmortality(cupid);
-        
+        //Saver.loadInts("rels.bin");
     }
     
 }
