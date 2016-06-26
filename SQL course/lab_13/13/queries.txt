@@ -1,7 +1,100 @@
-
-
-declare @a int, @b numeric(10,2), @str char(20)
+1. Declaring
 
 declare @a int, @b numeric(10,2), @str char(20)
+
+2. Setting
+
+declare @a int, @b numeric(10,2)
+set @a = 20
+set @b = (@a + @a) / 15
+select @b
+
+3. 
+declare @a int
+select @a = count(*) from Authors
+
+
+4. dates
+set dateformat dmy
+declare @d DateTime
+set @d = '31.01.2015 13:25:10'
+set @d = @d + 1
+select @d
+
+5 Temp table
+
+declare @table table(id int, name char(20) default 'Enter name')
+insert into @table(id) values(1)
+select * from @table
+
+6 Casting types
+
+declare @d DateTime, @str char(20)
+set @d = '31.01.2015'
+set @str = cast(@d as char(20));
+select @str
+
+7 Begin - end, if - else
+
+declare @a int, @str char(20)
+set @a = (select count(*) from Authors)
+if @a > 10
+begin
+	set @str = 'Bigger than 10'
+end
+else
+begin
+	set @str = 'Less than 10'
+end
+
+select @str
+
+
+8 Cursors
+
+declare @name char(100)
+declare cur scroll cursor for (select name_author from Authors)
+open cur
+fetch first from cur into @name
+while @@FETCH_STATUS = 0
+begin
+	fetch next from cur into @name
+	print @name
+end
+close cur
+deallocate cur
+
+========================================
+IND
+
+1. Count books and get results
+
+use Library;
+
+declare @c int, @str char(100)
+set @c = (select count(*) from Books)
+if @c < 5
+begin
+	set @str = 'Less than 5'
+end
+else
+begin
+	set @str = 'Bigger that 5'
+end
+print 'Total of books - ' + cast(@c as char(10))
+print @str
+
+
+2. Find min publish year of book
+
+declare @min int
+set @min = (select min(year) from Books)
+print 'Min publish year of all books is ' + cast(@min as char(4))
+
+3. Find previous year and select data from delivery based on previous year
+
+declare @d datetime
+set @d = dateadd(year, -1, GETDATE())
+select * from Delivery where year(date_return) = year(@d)
 
 
