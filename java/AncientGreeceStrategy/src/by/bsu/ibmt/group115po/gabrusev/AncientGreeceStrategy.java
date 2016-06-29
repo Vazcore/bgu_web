@@ -7,7 +7,7 @@ package by.bsu.ibmt.group115po.gabrusev;
 
 import by.bsu.ibmt.group115po.gabrusev.utils.MLogger;
 import by.bsu.ibmt.group115po.gabrusev.utils.Saver;
-import controllers.GameBehaviour;
+import by.bsu.ibmt.group115po.gabrusev.controllers.GameBehaviour;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,9 +27,6 @@ public class AncientGreeceStrategy {
         // Setting logger Level
         MLogger.setLevel("debug");   
         GameBehaviour.coreInit();
-        
-        
-        //Saver.loadInts("rels.bin");
     }
     
 }

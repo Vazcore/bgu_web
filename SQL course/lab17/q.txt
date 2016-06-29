@@ -1,0 +1,14 @@
+M15-58-05\SQLEXPRESS
+
+
+CREATE TABLE Employees
+(
+    Id int,
+    Name varchar(50) not null,
+    Photo varbinary(max) not null
+)
+
+INSERT INTO Employees (Id, Name, Photo) 
+SELECT 10, 'John', BulkColumn 
+FROM Openrowset( Bulk 'D:\15po15\Gabrusev\bgu_web\SQL course\lab17\img.jpg', Single_Blob) as EmployeePicture
+

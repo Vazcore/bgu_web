@@ -5,12 +5,14 @@
  */
 package by.bsu.ibmt.group115po.gabrusev.utils;
 
+import by.bsu.ibmt.group115po.gabrusev.controllers.GameBehaviour;
 import by.bsu.ibmt.group115po.gabrusev.models.GodEntity;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import org.apache.log4j.Logger;
 
 /**
@@ -39,7 +41,8 @@ public class Menu {
     
     public static void printInitMenu()
     {
-        boolean isData = checkData();        
+        boolean isData = checkData();
+        List<Object> objs = GameBehaviour.getData();
         System.out.println("============ Menu ================");
         if (isData)
         {
@@ -48,7 +51,8 @@ public class Menu {
         System.out.println("2. Add a god");
         System.out.println("3. Add a human");
         System.out.println("4. Remove data");
-        System.out.println("5. Start to play");
+        if (objs != null && objs.size() != 0)
+            System.out.println("5. Start to play");
         System.out.println("0. Exit");
         System.out.println("============================");
         System.out.println("Your choice: ");

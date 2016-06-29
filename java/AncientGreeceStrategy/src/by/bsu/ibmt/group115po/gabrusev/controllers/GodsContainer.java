@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package by.bsu.ibmt.group115po.gabrusev.controllers;
 
 import by.bsu.ibmt.group115po.gabrusev.models.God;
 import by.bsu.ibmt.group115po.gabrusev.models.GodEntity;

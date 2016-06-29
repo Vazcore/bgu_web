@@ -8,7 +8,7 @@ package by.bsu.ibmt.group115po.gabrusev.utils;
 import by.bsu.ibmt.group115po.gabrusev.models.God;
 import by.bsu.ibmt.group115po.gabrusev.models.Power;
 import by.bsu.ibmt.group115po.gabrusev.models.SupremeGod;
-import controllers.GameBehaviour;
+import by.bsu.ibmt.group115po.gabrusev.controllers.GameBehaviour;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.EOFException;

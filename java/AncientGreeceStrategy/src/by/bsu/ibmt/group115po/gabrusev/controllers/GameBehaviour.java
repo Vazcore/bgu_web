@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package by.bsu.ibmt.group115po.gabrusev.controllers;
 
 import by.bsu.ibmt.group115po.gabrusev.models.God;
 import by.bsu.ibmt.group115po.gabrusev.models.GodEntity;
@@ -23,8 +23,9 @@ import java.util.List;
  */
 public class GameBehaviour {
     
-    private static List<Object> objs = null;
+    private static List<Object> objs = null;    
     private static List<Integer> relations = null;
+    public static boolean game_running = false;
     
     public static List<Object> getData()
     {
@@ -61,6 +62,9 @@ public class GameBehaviour {
                     break;
                 case 2:                
                     addGod(objs, relations);
+                    break;
+                case 3:
+                    addHuman(objs, relations);
                     break;
                 case 4:
                     Saver.removeData();
@@ -167,6 +171,13 @@ public class GameBehaviour {
         }        
         
         return 0;
+    }
+    
+    public static boolean addHuman(List<Object> objs, List<Integer> relations)
+    {
+        // todo
+        // add a human
+        return true;
     }
     
     public static boolean addGod(List<Object> objs, List<Integer> relations) throws IOException
