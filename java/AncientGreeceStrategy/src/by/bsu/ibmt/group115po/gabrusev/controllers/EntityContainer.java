@@ -15,11 +15,14 @@ import java.util.List;
  *
  * @author Aliaksei_Habruseu
  */
-public class GodsContainer {
+public class EntityContainer {
     
     private static List<Object> objs = null;
     private static List<Integer> rels = null;
-    private static List<Integer> gods_ids = null;    
+    private static List<Integer> gods_ids = null;
+    private static List<Integer> human_ids = null;
+    public static int[] god_rels = {0,1};
+    public static int[] human_rels = {2,3};
     
     public static GodEntity current_god;
     public static int current_god_id;
@@ -28,19 +31,23 @@ public class GodsContainer {
     {
         objs = o;
         rels = r;
-        gods_ids = getGodsIds();        
+        gods_ids = getEntityIds(god_rels); 
+        human_ids = getEntityIds(human_rels);
     }    
     
     
-    public static List<Integer> getGodsIds() 
+    public static List<Integer> getEntityIds(int[] entity_rels) 
     {        
         if (objs == null || rels == null) return null;        
         List<Integer> ids = new ArrayList<Integer>();        
         for (int i = 0; i < rels.size(); i++) {
-            if (rels.get(i) == 0 || rels.get(i) == 1)
-            {
-                ids.add(i);
-            }
+            for (int j = 0; j < entity_rels.length; j++) {
+                if (rels.get(i) == entity_rels[j])
+                {
+                    ids.add(i);
+                    break;
+                }
+            }            
         }
         return ids;
     }
@@ -53,6 +60,16 @@ public class GodsContainer {
     public static Object getGod(int ch)
     {
         return objs.get(gods_ids.get(ch));
+    }
+    
+    public static Object getHuman(int ind)
+    {
+        return objs.get(ind);
+    }
+    
+    public static int getHumanClassId(int ch)
+    {
+        return rels.get(human_ids.get(ch));
     }
     
     public static String[] getListNameOfGods() 

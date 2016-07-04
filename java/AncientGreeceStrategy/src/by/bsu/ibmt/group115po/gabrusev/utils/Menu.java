@@ -13,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -110,6 +109,18 @@ public class Menu {
         System.out.println("============================");
         System.out.println("Your choice: ");
     }
+    
+    public static String generateQandAMenu(String ask)
+    {
+        System.out.println(ask);
+        try {
+            return inputConsole();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+            return null;
+        }
+    }
+    
     
     public static String printAddingGodMenu(String prop) throws IOException
     {

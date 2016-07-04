@@ -7,8 +7,12 @@ package by.bsu.ibmt.group115po.gabrusev.controllers;
 
 import by.bsu.ibmt.group115po.gabrusev.models.God;
 import by.bsu.ibmt.group115po.gabrusev.models.GodEntity;
+import by.bsu.ibmt.group115po.gabrusev.models.Human;
+import by.bsu.ibmt.group115po.gabrusev.models.HumanRank;
 import by.bsu.ibmt.group115po.gabrusev.models.Power;
+import by.bsu.ibmt.group115po.gabrusev.models.ReligiousHumanRank;
 import by.bsu.ibmt.group115po.gabrusev.models.SupremeGod;
+import by.bsu.ibmt.group115po.gabrusev.models.interfaces.HumanBehavior;
 import by.bsu.ibmt.group115po.gabrusev.utils.MLogger;
 import by.bsu.ibmt.group115po.gabrusev.utils.Menu;
 import by.bsu.ibmt.group115po.gabrusev.utils.Saver;
@@ -81,7 +85,7 @@ public class GameBehaviour {
         MLogger.info("Game is starting! Good Luck!");
         MLogger.info("Updating gods container - " + objs.size());
         // updating gods container
-        GodsContainer.updateData(objs, relations);
+        EntityContainer.updateData(objs, relations);
         Menu.getGameMenu();        
         int choice = Integer.parseInt(Menu.inputConsole());        
         int switching = -1;
@@ -89,11 +93,12 @@ public class GameBehaviour {
         {
             while(switching != 0)
             {
-                Menu.printList(GodsContainer.getListNameOfGods(), -1);
+                Menu.printList(EntityContainer.getListNameOfGods(), -1);
                 choice = Integer.parseInt(Menu.inputConsole());
                 MLogger.info("Choosing god with id - " + choice);
                 switching = play(choice);
-            }            
+            }
+            Saver.save(objs, relations);
         }
         else
         {
@@ -103,7 +108,7 @@ public class GameBehaviour {
     
     public static int play(int choice) throws IOException
     {
-        int cl_id = GodsContainer.getClassId(choice);
+        int cl_id = EntityContainer.getClassId(choice);
         boolean in_play = true;
         GodEntity enemy;
         String[] rels = Saver.getRelations();
@@ -111,15 +116,15 @@ public class GameBehaviour {
         String ch;
         if (rels[cl_id] == "God") 
         {
-            god = (God) GodsContainer.getGod(choice);
+            god = (God) EntityContainer.getGod(choice);
         }
         else
         {
-            god = (SupremeGod) GodsContainer.getGod(choice);
+            god = (SupremeGod) EntityContainer.getGod(choice);
         }
         god.introduce();
-        GodsContainer.current_god = god;
-        GodsContainer.current_god_id = choice;
+        EntityContainer.current_god = god;
+        EntityContainer.current_god_id = choice;
         Menu.next();
         while (in_play)
         {
@@ -128,15 +133,15 @@ public class GameBehaviour {
             if (ch.equals("1"))
             {
                 System.out.println("--- Choose God to atack ---");
-                Menu.printList(GodsContainer.getListNameOfGods(), GodsContainer.current_god_id);
+                Menu.printList(EntityContainer.getListNameOfGods(), EntityContainer.current_god_id);
                 ch = Menu.inputConsole();
-                if( rels[GodsContainer.getClassId(Integer.parseInt(ch))] == "God" )
+                if( rels[EntityContainer.getClassId(Integer.parseInt(ch))] == "God" )
                 {
-                    enemy = (God) GodsContainer.getGod(Integer.parseInt(ch));
+                    enemy = (God) EntityContainer.getGod(Integer.parseInt(ch));
                 }  
                 else
                 {
-                    enemy = (SupremeGod) GodsContainer.getGod(Integer.parseInt(ch));
+                    enemy = (SupremeGod) EntityContainer.getGod(Integer.parseInt(ch));
                 }                
                 god.atack(enemy);
                 Menu.next();
@@ -144,15 +149,15 @@ public class GameBehaviour {
             else if (ch.equals("4")) 
             {
                 System.out.println("--- Choose God to atack ---");
-                Menu.printList(GodsContainer.getListNameOfGods(), GodsContainer.current_god_id);
+                Menu.printList(EntityContainer.getListNameOfGods(), EntityContainer.current_god_id);
                 ch = Menu.inputConsole();
-                if( rels[GodsContainer.getClassId(Integer.parseInt(ch))] == "God" )
+                if( rels[EntityContainer.getClassId(Integer.parseInt(ch))] == "God" )
                 {
-                    enemy = (God) GodsContainer.getGod(Integer.parseInt(ch));
+                    enemy = (God) EntityContainer.getGod(Integer.parseInt(ch));
                 }  
                 else
                 {
-                    enemy = (SupremeGod) GodsContainer.getGod(Integer.parseInt(ch));
+                    enemy = (SupremeGod) EntityContainer.getGod(Integer.parseInt(ch));
                 }                
                 god.atack(enemy);
                 Menu.next();
@@ -168,15 +173,57 @@ public class GameBehaviour {
             }
             else if (ch.equals("0"))
                 return 0;
+            humanStepsInit(2000);
         }        
         
         return 0;
     }
     
-    public static boolean addHuman(List<Object> objs, List<Integer> relations)
+    private static void humanStepsInit(int time)
+    {
+        
+        List<Integer> human_ids = EntityContainer.getEntityIds(EntityContainer.human_rels);
+        String[] rels = Saver.getRelations();
+        
+        for (int i = 0; i < human_ids.size(); i++) {
+            Object obj = EntityContainer.getHuman(human_ids.get(i));
+            if (rels[EntityContainer.getHumanClassId(i) - 1] == "Human" || rels[EntityContainer.getHumanClassId(i) - 1] == "ReligiousHuman")
+            {
+                ((Human) obj).run();
+            }
+
+        }
+        
+    }
+    
+    public static boolean addHuman(List<Object> objs, List<Integer> relations) throws IOException
     {
         // todo
         // add a human
+        List<Object> objects = getData();
+        List<Integer> rels = getRelation();
+        System.out.println(" =========  Adding a Human ==============");
+        int type = Integer.parseInt(Menu.generateQandAMenu(" - Human or Religious Human: press 3 or 4"));
+        if (type != 3 && type != 4)
+            return false;
+        String name = Menu.generateQandAMenu(" - Type a name: ");
+        int age = Integer.parseInt(Menu.generateQandAMenu(" - Type age: "));
+        String city = Menu.generateQandAMenu(" - Type city: ");
+        float money = (float) 10.0;
+        int spirit = 100;
+        if (type == 3)
+        {
+            objects.add(new Human(name, age, city, money, spirit, new HumanRank()));
+            rels.add(type-1);
+        }
+        else
+        {
+            objects.add(new Human(name, age, city, money, spirit, new ReligiousHumanRank()));
+            rels.add(type-1);
+        }
+        System.out.println(" ========= Human was added ==============");
+        
+        Menu.next();
         return true;
     }
     

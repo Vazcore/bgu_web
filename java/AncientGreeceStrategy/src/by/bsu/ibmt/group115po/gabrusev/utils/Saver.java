@@ -47,6 +47,7 @@ public class Saver {
             oos.writeObject(objs.get(i));
         }        
         oos.close();
+        MLogger.info("Total object were saved: " + objs.size());
         return true;
     }
     
@@ -118,24 +119,14 @@ public class Saver {
     }
     
     public static boolean load(List<Object>objs, List<Integer>relations) throws FileNotFoundException, IOException, ClassNotFoundException {        
-        List<Integer> rels = loadRelations(relations);
-        
         FileInputStream fis = new FileInputStream(f_data);
         BufferedInputStream bis = new BufferedInputStream(fis);
-        ObjectInputStream ois = new ObjectInputStream(bis);
-        String[] relationsText = getRelations();        
+        ObjectInputStream ois = new ObjectInputStream(bis);      
         Object obj = null;
-        int it = 0;
-        int id_relation;
         try {
             while (true) {       
                 obj = ois.readObject();
-                id_relation = relations.get(it);
-                if ("God".equals(relationsText[id_relation]))
-                    objs.add( (God) obj);
-                else if ("SupremeGod".equals(relationsText[id_relation]))
-                    objs.add( (SupremeGod) obj);
-                it++;
+                objs.add(obj);
             }
         } catch(EOFException e) {
             ois.close();

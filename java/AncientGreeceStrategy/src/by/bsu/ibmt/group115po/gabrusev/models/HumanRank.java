@@ -6,12 +6,13 @@ package by.bsu.ibmt.group115po.gabrusev.models;
 
 import by.bsu.ibmt.group115po.gabrusev.models.interfaces.HumanBehavior;
 import by.bsu.ibmt.group115po.gabrusev.utils.MLogger;
+import java.io.Serializable;
 
 /**
  *
  * @author USER
  */
-public class HumanRank implements HumanBehavior{
+public class HumanRank implements HumanBehavior, Serializable{
 
     @Override
     public void pray(HumanEntity self, GodEntity god) {

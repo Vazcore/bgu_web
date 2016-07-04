@@ -5,9 +5,11 @@
  */
 package by.bsu.ibmt.group115po.gabrusev;
 
+import by.bsu.ibmt.group115po.gabrusev.controllers.EntityContainer;
 import by.bsu.ibmt.group115po.gabrusev.utils.MLogger;
 import by.bsu.ibmt.group115po.gabrusev.utils.Saver;
 import by.bsu.ibmt.group115po.gabrusev.controllers.GameBehaviour;
+import by.bsu.ibmt.group115po.gabrusev.models.Human;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,6 +29,14 @@ public class AncientGreeceStrategy {
         // Setting logger Level
         MLogger.setLevel("debug");   
         GameBehaviour.coreInit();
+        
+       /*List<Object> objs = new ArrayList<Object>();    
+       List<Integer> relations = new ArrayList<Integer>();
+       Saver.load(objs, relations);
+       EntityContainer.updateData(objs, relations);
+       ((Human) EntityContainer.getHuman(2)).introduce();*/
+        
+        
     }
     
 }
