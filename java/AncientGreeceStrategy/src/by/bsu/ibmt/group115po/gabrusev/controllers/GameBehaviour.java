@@ -173,23 +173,23 @@ public class GameBehaviour {
             }
             else if (ch.equals("0"))
                 return 0;
-            humanStepsInit(2000);
+            humanStepsInit();
         }        
         
         return 0;
     }
     
-    private static void humanStepsInit(int time)
+    private static void humanStepsInit()
     {
         
         List<Integer> human_ids = EntityContainer.getEntityIds(EntityContainer.human_rels);
-        String[] rels = Saver.getRelations();
+        String[] rels = Saver.getRelations();        
         
         for (int i = 0; i < human_ids.size(); i++) {
             Object obj = EntityContainer.getHuman(human_ids.get(i));
-            if (rels[EntityContainer.getHumanClassId(i) - 1] == "Human" || rels[EntityContainer.getHumanClassId(i) - 1] == "ReligiousHuman")
+            if (rels[EntityContainer.getHumanClassId(i) - 1] == "Human")
             {
-                ((Human) obj).run();
+                new Thread(((Human) obj)).start();
             }
 
         }

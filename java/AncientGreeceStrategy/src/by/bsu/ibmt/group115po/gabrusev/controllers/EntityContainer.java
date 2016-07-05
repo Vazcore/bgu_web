@@ -22,7 +22,7 @@ public class EntityContainer {
     private static List<Integer> gods_ids = null;
     private static List<Integer> human_ids = null;
     public static int[] god_rels = {0,1};
-    public static int[] human_rels = {2,3};
+    public static int[] human_rels = {2};
     
     public static GodEntity current_god;
     public static int current_god_id;
@@ -37,7 +37,8 @@ public class EntityContainer {
     
     
     public static List<Integer> getEntityIds(int[] entity_rels) 
-    {        
+    {       
+        System.out.println(entity_rels.length);
         if (objs == null || rels == null) return null;        
         List<Integer> ids = new ArrayList<Integer>();        
         for (int i = 0; i < rels.size(); i++) {

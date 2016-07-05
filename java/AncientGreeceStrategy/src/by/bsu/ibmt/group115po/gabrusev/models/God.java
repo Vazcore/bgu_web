@@ -13,6 +13,8 @@ import by.bsu.ibmt.group115po.gabrusev.utils.MLogger;
  */
 public class God extends GodEntity{
     
+    public final int rel = 0;
+    
     public God(String name, int age, Power power, int points)
     {
         super(name, age, power, points);
@@ -26,6 +28,11 @@ public class God extends GodEntity{
         MLogger.log(this.getName(), "Hail mortal creratures I am a God " + this.getName());
         MLogger.log(this.getName(), "I live in this world " + this.getAge() + " years!!!");
         MLogger.log(this.getName(), "I have power - " + this.getPower().getName());
+    }
+    
+    @Override
+    public String toString() {
+        return "" + this.rel;
     }
 
     

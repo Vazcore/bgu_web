@@ -33,8 +33,13 @@ public class AncientGreeceStrategy {
        /*List<Object> objs = new ArrayList<Object>();    
        List<Integer> relations = new ArrayList<Integer>();
        Saver.load(objs, relations);
-       EntityContainer.updateData(objs, relations);
-       ((Human) EntityContainer.getHuman(2)).introduce();*/
+       EntityContainer.updateData(objs, relations);       
+        for (int i = 0; i < relations.size(); i++) {
+            System.out.println(relations.get(i));
+        }
+        System.out.println(relations.size());
+        */
+       
         
         
     }

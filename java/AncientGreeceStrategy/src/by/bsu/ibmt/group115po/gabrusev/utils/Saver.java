@@ -19,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,8 +35,7 @@ public class Saver {
     private static String f_rels = "rels.bin";    
     
     public static void save(List<Object> objs, List<Integer> relations) throws FileNotFoundException, IOException {
-        saveData(objs, f_data);        
-        saveInt(relations, f_rels);
+        saveData(objs, f_data);
     }
     
     public static boolean saveData(List<Object> objs, String filename) throws FileNotFoundException, IOException 
@@ -43,11 +43,17 @@ public class Saver {
         FileOutputStream fos = new FileOutputStream(filename);
         BufferedOutputStream bos = new BufferedOutputStream(fos);
         ObjectOutputStream oos = new ObjectOutputStream(bos);
+        List<Integer> o_rel = new ArrayList<Integer>();
+        int rel;
         for (int i = 0; i < objs.size(); i++) {
+            Object obj = objs.get(i);
+            rel = Integer.parseInt(obj.toString());
+            o_rel.add(rel);
             oos.writeObject(objs.get(i));
         }        
         oos.close();
         MLogger.info("Total object were saved: " + objs.size());
+        saveInt(o_rel, f_rels);
         return true;
     }
     
@@ -63,14 +69,33 @@ public class Saver {
         return true;
     }
     
+    public static boolean load(List<Object>objs, List<Integer>relations) throws FileNotFoundException, IOException, ClassNotFoundException {        
+        FileInputStream fis = new FileInputStream(f_data);
+        BufferedInputStream bis = new BufferedInputStream(fis);
+        ObjectInputStream ois = new ObjectInputStream(bis); 
+        loadRelations(relations);
+        Object obj = null;
+        try {
+            while (true) {       
+                obj = ois.readObject();
+                objs.add(obj);
+            }
+        } catch(EOFException e) {
+            ois.close();
+        } catch(IOException e) {
+            System.err.println(e);
+        } catch (ClassNotFoundException e) {
+            System.err.println(e);
+        }
+        return true;
+    }
+    
     public static String[] getRelations()
     {
         String[] relations = new String[5];
         relations[0] = "God";
         relations[1] = "SupremeGod";
-        relations[2] = "Human";
-        relations[3] = "ReligiousHuman";
-        relations[4] = "OraculHuman";
+        relations[2] = "Human";        
         
         return relations;
     }
@@ -117,27 +142,6 @@ public class Saver {
             System.err.println(e);
         } 
     }
-    
-    public static boolean load(List<Object>objs, List<Integer>relations) throws FileNotFoundException, IOException, ClassNotFoundException {        
-        FileInputStream fis = new FileInputStream(f_data);
-        BufferedInputStream bis = new BufferedInputStream(fis);
-        ObjectInputStream ois = new ObjectInputStream(bis);      
-        Object obj = null;
-        try {
-            while (true) {       
-                obj = ois.readObject();
-                objs.add(obj);
-            }
-        } catch(EOFException e) {
-            ois.close();
-        } catch(IOException e) {
-            System.err.println(e);
-        } catch (ClassNotFoundException e) {
-            System.err.println(e);
-        }
-        return true;
-    }
-    
    
     public static void serialize(Object obj, String filename) throws IOException {
         FileOutputStream fos = new FileOutputStream(filename);

@@ -18,7 +18,7 @@ public class ReligiousHumanRank implements HumanBehavior, Serializable{
     
     @Override
     public void pray(HumanEntity self, GodEntity god) {
-        
+        System.out.println("Prayyiiing");
     }
 
     @Override

@@ -15,6 +15,7 @@ import by.bsu.ibmt.group115po.gabrusev.utils.MLogger;
 public class Human extends HumanEntity implements Runnable{
     
     public int time = 2000;
+    public final int rel = 2;
     
     public Human(String name, int age, String city, float money, int spirit, HumanBehavior bh)
     {
@@ -37,4 +38,11 @@ public class Human extends HumanEntity implements Runnable{
             this.pray(this.getGod());            
         }        
     }
+
+    @Override
+    public String toString() {
+        return "" + this.rel;
+    }
+    
+    
 }

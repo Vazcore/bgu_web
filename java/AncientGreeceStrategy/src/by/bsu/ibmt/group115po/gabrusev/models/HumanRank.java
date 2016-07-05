@@ -16,7 +16,7 @@ public class HumanRank implements HumanBehavior, Serializable{
 
     @Override
     public void pray(HumanEntity self, GodEntity god) {
-        
+        MLogger.info("I am not religious. I dont believe in gods");
     }
 
     @Override

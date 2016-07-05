@@ -12,6 +12,9 @@ import by.bsu.ibmt.group115po.gabrusev.utils.MLogger;
  * @author Alexey
  */
 public class SupremeGod extends GodEntity {
+    
+    public final int rel = 1;
+    
     public SupremeGod(String name, int age, Power power, int points)
     {
         super(name, age, power, points);
@@ -34,6 +37,11 @@ public class SupremeGod extends GodEntity {
         int val = this.getPoints() + this.getImmortalityValue();
         this.setPoints(val);
         MLogger.info("Supreme God " + this.getName() + " has healed by " + val);
+    }
+    
+    @Override
+    public String toString() {
+        return "" + this.rel;
     }
     
 }
