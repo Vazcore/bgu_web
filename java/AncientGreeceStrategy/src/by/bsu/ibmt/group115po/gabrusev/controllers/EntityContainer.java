@@ -7,7 +7,9 @@ package by.bsu.ibmt.group115po.gabrusev.controllers;
 
 import by.bsu.ibmt.group115po.gabrusev.models.God;
 import by.bsu.ibmt.group115po.gabrusev.models.GodEntity;
+import by.bsu.ibmt.group115po.gabrusev.models.Human;
 import by.bsu.ibmt.group115po.gabrusev.models.SupremeGod;
+import by.bsu.ibmt.group115po.gabrusev.utils.Saver;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +39,7 @@ public class EntityContainer {
     
     
     public static List<Integer> getEntityIds(int[] entity_rels) 
-    {       
-        System.out.println(entity_rels.length);
+    {        
         if (objs == null || rels == null) return null;        
         List<Integer> ids = new ArrayList<Integer>();        
         for (int i = 0; i < rels.size(); i++) {
@@ -63,14 +64,41 @@ public class EntityContainer {
         return objs.get(gods_ids.get(ch));
     }
     
-    public static Object getHuman(int ind)
+    public static Human getHuman(int ind)
     {
-        return objs.get(ind);
+        return (Human) objs.get(ind);
     }
     
     public static int getHumanClassId(int ch)
     {
         return rels.get(human_ids.get(ch));
+    }
+    
+    public static List<Human> getHumans() 
+    {
+        List<Human> hs = new ArrayList<Human>();
+        List<Integer> human_ids = getEntityIds(human_rels);
+        String[] rels = Saver.getRelations();
+        for (int i = 0; i < human_ids.size(); i++) {
+            Human human = EntityContainer.getHuman(human_ids.get(i));
+            hs.add(human);
+        }
+        return hs;
+    }
+    
+    public static List<Human> getUnreligiousHumans() 
+    {
+        List<Human> hs = getHumans();
+        List<Human> uhs = new ArrayList<Human>();
+        Human current = null;
+        for (int i = 0; i < hs.size(); i++) {
+            current = hs.get(i);
+            if (!current.pray(current.getGod()))
+            {
+                uhs.add(current);
+            }
+        }
+        return uhs;
     }
     
     public static String[] getListNameOfGods() 

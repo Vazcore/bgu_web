@@ -14,7 +14,7 @@ import by.bsu.ibmt.group115po.gabrusev.models.HumanEntity;
  * @author USER
  */
 public interface HumanBehavior {    
-    public abstract void pray(HumanEntity h, GodEntity god); 
+    public abstract boolean pray(HumanEntity h, GodEntity god); 
     public abstract void gatherTax(HumanEntity h, Fortune f);
     public abstract GodEntity getGod();
     public abstract GodEntity setGod(GodEntity god);

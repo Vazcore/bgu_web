@@ -17,20 +17,31 @@ public class ReligiousHumanRank implements HumanBehavior, Serializable{
     private GodEntity god = null;
     
     @Override
-    public void pray(HumanEntity self, GodEntity god) {
-        System.out.println("Prayyiiing");
+    public boolean pray(HumanEntity self, GodEntity god) {
+        Fortune f = Fortune.instance;
+        int points = f.getIntFortune();
+        if (points % 2 == 0)
+        {
+            MLogger.log(self.getName(), "Uaaa. I've got " + points + " for spirit");
+            self.setSpirit(points);
+        }
+        else
+        {
+            MLogger.log(self.getName(), "Uaaa. I've got " + points + " for money");
+            self.setMoney(points);
+        }
+        return true;
     }
 
     @Override
-    public GodEntity getGod() {
-        MLogger.info("I am not religious. I dont believe in gods");
-        return null;
+    public GodEntity getGod() {        
+        return god;
     }
 
     @Override
     public void gatherTax(HumanEntity self, Fortune f) {
         MLogger.info("I am not religious. I dont believe in gods");
-        self.setTax(0);
+        self.setMoney(0);
     }
 
     @Override

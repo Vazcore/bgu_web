@@ -35,7 +35,12 @@ public class Human extends HumanEntity implements Runnable{
         long startTime = System.currentTimeMillis();
         while((System.currentTimeMillis() - startTime) < this.time)
         {
-            this.pray(this.getGod());            
+            this.pray(this.getGod());  
+            try {
+                Thread.sleep(300);   
+            } catch (InterruptedException e) {
+                MLogger.fatal(e.toString());
+            }
         }        
     }
 

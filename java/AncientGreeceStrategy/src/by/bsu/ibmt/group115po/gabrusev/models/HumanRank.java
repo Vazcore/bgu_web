@@ -15,8 +15,9 @@ import java.io.Serializable;
 public class HumanRank implements HumanBehavior, Serializable{
 
     @Override
-    public void pray(HumanEntity self, GodEntity god) {
+    public boolean pray(HumanEntity self, GodEntity god) {
         MLogger.info("I am not religious. I dont believe in gods");
+        return false;
     }
 
     @Override
@@ -28,7 +29,7 @@ public class HumanRank implements HumanBehavior, Serializable{
     @Override
     public void gatherTax(HumanEntity self, Fortune f) {
         MLogger.info("I am not religious. I dont believe in gods");
-        self.setTax(0);
+        self.setMoney(0);
     }
 
     @Override

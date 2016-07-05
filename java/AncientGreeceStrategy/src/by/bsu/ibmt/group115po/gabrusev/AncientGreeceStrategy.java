@@ -30,17 +30,14 @@ public class AncientGreeceStrategy {
         MLogger.setLevel("debug");   
         GameBehaviour.coreInit();
         
-       /*List<Object> objs = new ArrayList<Object>();    
-       List<Integer> relations = new ArrayList<Integer>();
-       Saver.load(objs, relations);
-       EntityContainer.updateData(objs, relations);       
-        for (int i = 0; i < relations.size(); i++) {
-            System.out.println(relations.get(i));
-        }
-        System.out.println(relations.size());
-        */
-       
-        
+//       List<Object> objs = new ArrayList<Object>();    
+//       List<Integer> relations = new ArrayList<Integer>();
+//       Saver.load(objs, relations);
+//       EntityContainer.updateData(objs, relations);       
+//        //System.out.println(relations);
+//       List<Integer> human_ids = EntityContainer.getEntityIds(EntityContainer.human_rels);
+//       Human h = (Human)EntityContainer.getHuman(2);
+//        System.out.println(EntityContainer.getHumanClassId(0));
         
     }
     

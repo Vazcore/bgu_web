@@ -44,9 +44,9 @@ public abstract class HumanEntity extends Creature {
         this.bh = bh;
     }
     
-    public void pray(GodEntity god)
+    public boolean pray(GodEntity god)
     {
-        this.bh.pray(this, god);
+        return this.bh.pray(this, god);
     }
     
     public GodEntity getGod()
@@ -54,7 +54,13 @@ public abstract class HumanEntity extends Creature {
         return bh.getGod();
     }
     
-    public void setTax(float tax)
+    public boolean setGod (GodEntity god)
+    {
+        this.bh.setGod(god);
+        return true;
+    }
+    
+    public void setMoney(float tax)
     {
         this.money = tax;
     }

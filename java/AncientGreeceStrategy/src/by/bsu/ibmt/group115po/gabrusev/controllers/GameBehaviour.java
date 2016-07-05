@@ -65,10 +65,10 @@ public class GameBehaviour {
                     MLogger.info("Data were loaded");
                     break;
                 case 2:                
-                    addGod(objs, relations);
+                    addGod();
                     break;
                 case 3:
-                    addHuman(objs, relations);
+                    addHuman();
                     break;
                 case 4:
                     Saver.removeData();
@@ -114,7 +114,7 @@ public class GameBehaviour {
         String[] rels = Saver.getRelations();
         GodEntity god;
         String ch;
-        if (rels[cl_id] == "God") 
+        if (rels[cl_id].equals("God")) 
         {
             god = (God) EntityContainer.getGod(choice);
         }
@@ -145,6 +145,18 @@ public class GameBehaviour {
                 }                
                 god.atack(enemy);
                 Menu.next();
+            }
+            else if (ch.equals("2"))
+            {
+                System.out.println("--- Choose Human ---");
+                List<Human> humans = EntityContainer.getUnreligiousHumans();
+                Menu.printHumanList(humans);
+                ch = Menu.inputConsole();
+                int h_index = Integer.parseInt(ch);
+                if (h_index >= humans.size())
+                    return 0;
+                Human human = humans.get(h_index);
+                human.setBehavior(new ReligiousHumanRank());                
             }
             else if (ch.equals("4")) 
             {
@@ -181,22 +193,14 @@ public class GameBehaviour {
     
     private static void humanStepsInit()
     {
-        
-        List<Integer> human_ids = EntityContainer.getEntityIds(EntityContainer.human_rels);
-        String[] rels = Saver.getRelations();        
-        
-        for (int i = 0; i < human_ids.size(); i++) {
-            Object obj = EntityContainer.getHuman(human_ids.get(i));
-            if (rels[EntityContainer.getHumanClassId(i) - 1] == "Human")
-            {
-                new Thread(((Human) obj)).start();
-            }
-
+        List<Human> humans = EntityContainer.getHumans();
+       
+        for (int i = 0; i < humans.size(); i++) {
+            new Thread(((Human) humans.get(i))).start();
         }
-        
     }
     
-    public static boolean addHuman(List<Object> objs, List<Integer> relations) throws IOException
+    public static boolean addHuman() throws IOException
     {
         // todo
         // add a human
@@ -227,7 +231,7 @@ public class GameBehaviour {
         return true;
     }
     
-    public static boolean addGod(List<Object> objs, List<Integer> relations) throws IOException
+    public static boolean addGod() throws IOException
     {
         List<Object> objects = getData();
         List<Integer> rels = getRelation();

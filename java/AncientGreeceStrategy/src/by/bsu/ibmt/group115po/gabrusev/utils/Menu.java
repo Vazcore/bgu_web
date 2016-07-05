@@ -7,6 +7,7 @@ package by.bsu.ibmt.group115po.gabrusev.utils;
 
 import by.bsu.ibmt.group115po.gabrusev.controllers.GameBehaviour;
 import by.bsu.ibmt.group115po.gabrusev.models.GodEntity;
+import by.bsu.ibmt.group115po.gabrusev.models.Human;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -71,6 +72,16 @@ public class Menu {
         for (int i = 0; i < list.length; i++) {
             if (i != except_id)
                 System.out.println(i + ". " + list[i]);
+        }
+        System.out.println("============================");
+        System.out.println("Your choice: ");
+    }
+    
+    public static void printHumanList(List<Human> hs)
+    {
+        System.out.println("======= Human List ============");
+        for (int i = 0; i < hs.size(); i++) {
+            System.out.println(i + ". " + hs.get(i).getName());
         }
         System.out.println("============================");
         System.out.println("Your choice: ");

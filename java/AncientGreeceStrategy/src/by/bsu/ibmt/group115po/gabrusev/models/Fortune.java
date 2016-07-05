@@ -4,6 +4,8 @@
  */
 package by.bsu.ibmt.group115po.gabrusev.models;
 
+import java.util.Random;
+
 /**
  *
  * @author USER
@@ -14,9 +16,10 @@ public class Fortune {
     
     private Fortune() {}
     
-    public  Fortune getIntFortune()
+    public int getIntFortune()
     {
-        return this.instance;
+        Random rand = new Random();
+        return rand.nextInt((1000 - 0) + 1) + 0;
     }
     
     public int initStream(HumanEntity human, GodEntity god)
