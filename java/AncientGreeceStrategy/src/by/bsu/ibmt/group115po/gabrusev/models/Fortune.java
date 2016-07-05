@@ -13,17 +13,12 @@ import java.util.Random;
 public class Fortune {
     
     public static Fortune instance = new Fortune();
+    public static Random rand = new Random();
     
     private Fortune() {}
     
-    public int getIntFortune()
+    public synchronized int getIntFortune(GodEntity god)
     {
-        Random rand = new Random();
         return rand.nextInt((1000 - 0) + 1) + 0;
-    }
-    
-    public int initStream(HumanEntity human, GodEntity god)
-    {        
-        return god.getPoints();
     }
 }

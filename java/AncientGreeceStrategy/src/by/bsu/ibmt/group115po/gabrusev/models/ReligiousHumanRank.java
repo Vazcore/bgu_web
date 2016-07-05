@@ -19,7 +19,7 @@ public class ReligiousHumanRank implements HumanBehavior, Serializable{
     @Override
     public boolean pray(HumanEntity self, GodEntity god) {
         Fortune f = Fortune.instance;
-        int points = f.getIntFortune();
+        int points = f.getIntFortune(god);
         if (points % 2 == 0)
         {
             MLogger.log(self.getName(), "Uaaa. I've got " + points + " for spirit");

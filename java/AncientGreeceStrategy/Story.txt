@@ -1,3 +1,12 @@
-1. Общий ресурс - Fotune
-Fotune - singleton
+1. General resource - Fotune
+   Fotune - singleton
+   
+2. Gods - main characters
+          can atack each other
+		  supreme god can take away immortality and heal
+		  can recruit human
+
+3. Human - has 2 behaviour: normal and religious
+           religious human can pray and get money or spirit as random points from Fortune
+
 
