@@ -1,0 +1,16 @@
+Tue Nov 08 23:49:38 MSK 2016 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
+----------------------------------------------------------------
+Tue Nov 08 23:49:38 MSK 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0158-45b4-1109-fffff28509fc 
+on database directory E:\Documents\BGU\Servlets\l1\bgu with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
+Loaded from file:/E:/Programms/java/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_111-b14
+user.dir=E:\Programms\java\db
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=E:\Documents\BGU\Servlets\l1
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Wed Nov 09 01:02:11 MSK 2016: Shutting down Derby engine
