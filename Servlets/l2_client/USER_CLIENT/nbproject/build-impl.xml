@@ -771,13 +771,9 @@ exists or setup the property manually. For example like this:
     </target>
     <target depends="init" if="no.dist.ear.dir" name="-deps-module-jar" unless="no.deps">
         <ant antfile="${project.EJB_USERS_REMOTE}/build.xml" inheritall="false" target="jar"/>
-        <ant antfile="${project.EJB_USER_MODULE}/build.xml" inheritall="false" target="dist"/>
     </target>
     <target depends="init" if="dist.ear.dir" name="-deps-ear-jar" unless="no.deps">
         <ant antfile="${project.EJB_USERS_REMOTE}/build.xml" inheritall="false" target="jar"/>
-        <ant antfile="${project.EJB_USER_MODULE}/build.xml" inheritall="false" target="dist-ear">
-            <property location="${build.dir}" name="dist.ear.dir"/>
-        </ant>
     </target>
     <target depends="init, -check-main-class, -deps-module-jar, -deps-ear-jar" name="deps-jar"/>
     <target depends="init,deps-jar" name="-pre-pre-compile">
@@ -788,19 +784,16 @@ exists or setup the property manually. For example like this:
         <!-- You can override this target in the ../build.xml file. -->
     </target>
     <target depends="compile" if="is.server.weblogic" name="library-inclusion-in-archive">
-        <basename file="${reference.EJB_USER_MODULE.dist}" property="manifest.reference.EJB_USER_MODULE.dist"/>
         <basename file="${reference.EJB_USERS_REMOTE.jar}" property="manifest.reference.EJB_USERS_REMOTE.jar"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update">
-            <attribute name="Extension-List" value="jar-1 jar-2 "/>
-            <attribute name="jar-1-Extension-Name" value="${manifest.reference.EJB_USER_MODULE.dist}"/>
-            <attribute name="jar-2-Extension-Name" value="${manifest.reference.EJB_USERS_REMOTE.jar}"/>
+            <attribute name="Extension-List" value="jar-1 "/>
+            <attribute name="jar-1-Extension-Name" value="${manifest.reference.EJB_USERS_REMOTE.jar}"/>
         </manifest>
     </target>
     <target depends="compile" if="dist.ear.dir" name="library-inclusion-in-manifest">
-        <copyfiles files="${reference.EJB_USER_MODULE.dist}" manifestproperty="manifest.reference.EJB_USER_MODULE.dist" todir="${dist.ear.dir}"/>
         <copyfiles files="${reference.EJB_USERS_REMOTE.jar}" manifestproperty="manifest.reference.EJB_USERS_REMOTE.jar" todir="${dist.ear.dir}/lib"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update">
-            <attribute name="Class-Path" value="${manifest.reference.EJB_USER_MODULE.dist} ${manifest.reference.EJB_USERS_REMOTE.jar} lib/${manifest.reference.EJB_USERS_REMOTE.jar} "/>
+            <attribute name="Class-Path" value="${manifest.reference.EJB_USERS_REMOTE.jar} lib/${manifest.reference.EJB_USERS_REMOTE.jar} "/>
         </manifest>
     </target>
     <target name="-copy-meta-inf">
@@ -1305,7 +1298,6 @@ exists or setup the property manually. For example like this:
             -->
     <target depends="init" name="deps-clean" unless="no.deps">
         <ant antfile="${project.EJB_USERS_REMOTE}/build.xml" inheritall="false" target="clean"/>
-        <ant antfile="${project.EJB_USER_MODULE}/build.xml" inheritall="false" target="clean"/>
     </target>
     <target depends="init" name="-do-clean">
         <delete dir="${build.dir}"/>

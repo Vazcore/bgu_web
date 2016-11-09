@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Dictionary</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <Font color="green" size="8">Dictionary</Font>
+        <br><br>
+        <h3>Add New Word</h3>
+        <form name="frm" method="Get" action="DictionaryServlet">
+            <Font color="blue" size="6"> Enter word:</Font><Input type="Text" name="txt" value=""/>
+            <br><br>
+            <Font color="blue" size="6">Translation </Font><input type="text" name ="trans" value=" "/><br>
+            <input type="submit" value="Add Word" />
+        </form>
+        
+        <h3>Translate</h3>
+        <form name="frm" method="Get" action="TranslateServlet">
+            <Font color="blue" size="6"> Enter word:</Font><Input type="Text" name="word" value=""/>            
+            <input type="submit" value="Translate" />
+        </form>
+        
+        <br><br>        
+        <a href="ValutasServlet">Show Valutas</a>
+    </body>
+</html>

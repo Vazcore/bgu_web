@@ -45,9 +45,8 @@ public class DatabaseService {
             conn = DriverManager.getConnection(dbURL);
             stmt = conn.createStatement();
             ResultSet results = stmt.executeQuery("select * from " + tableName + " where age=" + age + " and mark > 4");
-            while(results.next()) {
-                System.out.println(results.getString(2));
-                //names.add(dbURL)
+            while(results.next()) {                
+                names.add(results.getString("name"));
             }
             conn.close();
             stmt.close();

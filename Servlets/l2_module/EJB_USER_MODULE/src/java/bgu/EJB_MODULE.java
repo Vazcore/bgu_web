@@ -43,4 +43,26 @@ public class EJB_MODULE implements EJB_MODULERemote {
         }
         return res;
     }
+
+    @Override
+    public String addStudent(String fio, String department, String group) {
+        User student = new User(fio, department, group);
+        users.add(student);
+        return null;
+    }
+
+    @Override
+    public String deleteStud(String fio) {
+
+        for (Iterator<User> it =
+                users.iterator(); it.hasNext();) {
+            User st = it.next();
+            String name = st.getFio();
+            if (name.equals(fio)) {
+                users.remove(st);
+                break;
+            }
+        }
+        return null;
+    }
 }

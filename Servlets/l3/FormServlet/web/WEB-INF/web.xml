@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <servlet>
+        <servlet-name>DictionaryServlet</servlet-name>
+        <servlet-class>bgu.DictionaryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TranslateServlet</servlet-name>
+        <servlet-class>bgu.TranslateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ValutasServlet</servlet-name>
+        <servlet-class>bgu.ValutasServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DictionaryServlet</servlet-name>
+        <url-pattern>/DictionaryServlet</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>dictionary.html</welcome-file>
+    </welcome-file-list>
+    <servlet-mapping>
+        <servlet-name>TranslateServlet</servlet-name>
+        <url-pattern>/TranslateServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ValutasServlet</servlet-name>
+        <url-pattern>/ValutasServlet</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+</web-app>

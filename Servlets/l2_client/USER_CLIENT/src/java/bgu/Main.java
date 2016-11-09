@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package user_client;
+package bgu;
 
-import bgu.EJB_MODULERemote;
 import javax.ejb.EJB;
+
 
 
 
@@ -18,15 +18,15 @@ public class Main {
 
     @EJB
     private static EJB_MODULERemote eJB_MODULE;
-
-
     
-    /**
-     * @param args the command line arguments
-     */
-    @EJB(mappedName="EJB_MODULERemote")
     public static void main(String[] args) {
-        System.out.println("Hola");
+        //System.out.println("Hola");
+        System.out.println(eJB_MODULE.getUserInfo("Ivanov"));
+        
+        eJB_MODULE.addStudent("Habruseu", "IBMT", "pv1_15po");
+        eJB_MODULE.deleteStud("Ivanov");
+        
+        System.out.println(eJB_MODULE.getUserInfo("Habruseu"));
     }
     
 }

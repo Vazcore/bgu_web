@@ -14,4 +14,6 @@ import javax.ejb.Remote;
 @Remote
 public interface EJB_MODULERemote {
     String getUserInfo(String fio);
+    String addStudent(String fio, String department, String group);
+    String deleteStud(String fio);
 }
