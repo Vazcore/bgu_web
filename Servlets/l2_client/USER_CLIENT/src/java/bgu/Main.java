@@ -9,7 +9,6 @@ import javax.ejb.EJB;
 
 
 
-
 /**
  *
  * @author vazco
@@ -17,16 +16,17 @@ import javax.ejb.EJB;
 public class Main {
 
     @EJB
-    private static EJB_MODULERemote eJB_MODULE;
+    private static NewSessionBeanRemote newSessionBean;
+
+    
     
     public static void main(String[] args) {
         //System.out.println("Hola");
-        System.out.println(eJB_MODULE.getUserInfo("Ivanov"));
+        System.out.println(newSessionBean.getUserInfo("Ivanov"));        
+        newSessionBean.addStudent("Habruseu", "IBMT", "pv1_15po");
+        newSessionBean.deleteStud("Ivanov");
         
-        eJB_MODULE.addStudent("Habruseu", "IBMT", "pv1_15po");
-        eJB_MODULE.deleteStud("Ivanov");
-        
-        System.out.println(eJB_MODULE.getUserInfo("Habruseu"));
+        System.out.println(newSessionBean.getUserInfo("Habruseu"));
     }
     
 }

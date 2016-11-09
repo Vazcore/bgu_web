@@ -5,7 +5,7 @@
  */
 package bgu;
 
-import javax.ejb.Remote;
+
 
 /**
  *

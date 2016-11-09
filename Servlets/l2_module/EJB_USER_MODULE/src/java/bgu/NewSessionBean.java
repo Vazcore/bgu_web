@@ -12,12 +12,12 @@ import javax.ejb.Stateless;
 
 /**
  *
- * @author vazco
+ * @author USER
  */
 @Stateless
-public class EJB_MODULE implements EJB_MODULERemote {
-    
-    private static final long serialVersionUID = 1L;
+public class NewSessionBean implements NewSessionBeanRemote {
+
+     private static final long serialVersionUID = 1L;
     
     private String fio;
     private String department;

@@ -5,6 +5,7 @@
  */
 package bgu;
 
+import java.util.ArrayList;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -18,7 +19,11 @@ public class WebDbClient {
 
     public static void main(String[] args) {
         DatabaseService service = new DatabaseService();        
-        service.getSmartPeopleNames(25);
+        
+        ArrayList<String> names = service.getSmartPeopleNames(25);
+        for (int i =0; i < names.size(); i++) {
+            System.out.println(names.get(i));
+        }
         
     }
     

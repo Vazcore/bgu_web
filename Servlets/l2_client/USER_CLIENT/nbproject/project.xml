@@ -11,16 +11,25 @@
             <test-roots>
                 <root id="test.src.dir" name="Test Packages"/>
             </test-roots>
-            <included-library dirs="200">reference.EJB_USERS_REMOTE.jar</included-library>
+            <included-library dirs="100">reference.EJB_USER_MODULE.dist</included-library>
+            <included-library dirs="200">reference.EJB_LIB.jar</included-library>
         </data>
         <references xmlns="http://www.netbeans.org/ns/ant-project-references/1">
             <reference>
-                <foreign-project>EJB_USERS_REMOTE</foreign-project>
+                <foreign-project>EJB_LIB</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>
                 <clean-target>clean</clean-target>
                 <id>jar</id>
+            </reference>
+            <reference>
+                <foreign-project>EJB_USER_MODULE</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>dist</target>
+                <clean-target>clean</clean-target>
+                <id>dist</id>
             </reference>
         </references>
     </configuration>

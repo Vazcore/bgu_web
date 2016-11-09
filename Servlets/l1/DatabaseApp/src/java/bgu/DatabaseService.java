@@ -23,7 +23,7 @@ public class DatabaseService {
     
     private static Connection conn = null;
     private static Statement stmt = null;
-    private static String dbURL ="jdbc:derby://localhost:1527/bgu;user=alex;password=1234";
+    private static String dbURL ="jdbc:derby://localhost:1527/dictionary;user=alex;password=1234";
     private static String tableName = "users";    
 
     /**
