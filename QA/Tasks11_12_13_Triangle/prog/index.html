@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="bootstrap.min.css" />
+</head>
+<body>
+    
+    <div class="container">
+    	<h3>Triangle</h3>
+    	<div class="form-group">
+    		<input type="number" placeholder="Side A" class="sides form-control" />
+    	</div>
+    	<div class="form-group">
+    		<input type="number" placeholder="Side B" class="sides form-control" />
+    	</div>
+    	<div class="form-group">
+    		<input type="number" placeholder="Side C" class="sides form-control" />
+    	</div>
+    	<div class="form-group">
+    		<button class="btn btn-success" type="button" id="calc">Get Type</button>
+    	</div>
+    </div>
+
+    <script type="text/javascript">
+    	
+    document.addEventListener('DOMContentLoaded', () => {
+    	
+    	var b = document.querySelector('#calc');
+    	b.addEventListener('click', () => {
+    		let sides = [];
+    		for (let side of document.querySelectorAll('.sides')) {    			
+    			let val = Number.parseInt(side.value);
+    			sides.push(val);
+    			// not a number
+    			if(!isNumber(val)) {
+    				alert(val + ' - Not a number');
+    				return false;
+    			}
+    			// bigger than 0
+    			if(!biggerThanZero(val)) {
+    				alert(val + ' - Not bigger than 0');
+    				return false;
+    			}
+    			if (isMaxNumber(val)) {
+    				alert(val + ' -  exceeds max number =' + Number.MAX_SAFE_INTEGER);
+    				return false;	
+    			}
+    			if (isMinNumber(val)) {
+    				alert(val + ' -  exceeds min number =' + Number.MIN_SAFE_INTEGER);
+    				return false;		
+    			}
+    		}
+    		let exist = isExist(sides);
+    		if (!exist) {
+    			alert('Triangle doesn\'t exist! ');
+    			return false;
+    		}
+    		if (notEqual(sides)) {
+    			alert('Triangle doesnt equal! ');
+    			return false;	
+    		}
+    		if (isosceles(sides)) {
+    			alert('Triangle is isosceles! ');
+    			return false;	
+    		}
+    		
+    		if (isEqual(sides)) {
+    			alert('Triangle is equal! ');
+    			return false;	
+    		}
+    	});
+
+    });
+
+    function isMaxNumber(side) {
+    	return side >= Number.MAX_SAFE_INTEGER;
+    }
+
+    function isMinNumber(side) {
+    	return side <= Number.MIN_SAFE_INTEGER;
+    }
+
+    function isNumber(side) {
+    	return Number.isInteger(side);
+    }
+
+    function biggerThanZero(side) {
+    	return side > 0;
+    }
+
+    function isExist(a) {
+    	return (a[0] < a[1]+a[2] && a[1] < a[0]+a[2] && a[2] < a[0]+a[1]);
+    }
+
+    function isEqual(a) {
+    	return (a[0] === a[1] && a[1] === a[2]);
+    }
+
+    function notEqual(a) {
+    	return (a[0] !== a[1] && a[0] !== a[2]);
+    }
+
+    function isosceles(a) {
+    	return     (a[0] === a[1] && a[2] !== a[0]) 
+    			|| (a[0] === a[2] && a[1] !== a[2]) 
+    			|| (a[1] === a[2] && a[0] !== a[1]);
+    } 
+
+    </script>
+</body>
+</html>
